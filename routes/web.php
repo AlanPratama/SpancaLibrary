@@ -36,14 +36,13 @@ Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'registerProcess']);
 
 // USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE, 
-Route::get('/buku', [BukuController::class, 'index_user']);
 
+Route::get('/kategori/novel', [BukuController::class, 'novel'])->name('buku.novels');
+Route::get('/kategori/manga', [BukuController::class, 'manga'])->name('buku.mangas');
+Route::get('/kategori/study', [BukuController::class, 'study'])->name('buku.studys');
 
-Route::get('/buku/novel', [BukuController::class, 'novel'])->name('buku.novels');
-Route::get('/buku/manga', [BukuController::class, 'manga'])->name('buku.mangas');
-Route::get('/buku/study', [BukuController::class, 'study'])->name('buku.studys');
-
-Route::get('/buku/{slug}', [BukuController::class, 'detail'])->name('buku.detail');
+Route::get('/kumpulan-buku', [BukuController::class, 'index_user']);
+Route::get('/detail-buku/{slug}', [BukuController::class, 'detail'])->name('buku.detail');
 
 
 Route::middleware('auth')->group(function () {
@@ -55,11 +54,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/buku/{slug}', [RentController::class, 'pinjamBuku'])->name('pinjam.buku');
     Route::get('/histori-peminjaman/{slug}', [UserController::class, 'indexHistori']);
 
+    Route::post('izin.ebook/{slug}', [RentController::class, 'izinEbook'])->name('izin.ebook');
+
     Route::middleware('only_admin')->group(function(){
         // ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, 
         Route::get('/daftar-buku', [BukuController::class, 'index'])->name('dBuku.index');
         Route::get('/daftar-buku/{slug}', [BukuController::class, 'show'])->name('buku.show');
-        Route::delete('/daftar-buku/{slug}', [BukuController::class, 'destroy'])->name('buku.destroy');
+        Route::delete('/delete-buku/{slug}', [BukuController::class, 'destroy'])->name('buku.destroy');
 
         Route::get('/tambah-buku', [BukuController::class, 'create'])->name('buku.create');
         Route::post('/tambah-buku', [BukuController::class, 'store'])->name('buku.store');
@@ -76,12 +77,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/catatan-butuh-persetujuan/setuju/{kode}', [RentController::class, 'peminjamanSetuju']);
         Route::get('/catatan-butuh-persetujuan/tidak-setuju/{kode}', [RentController::class, 'peminjamanTidakSetuju']);
 
+        Route::post('qrButuhSetuju', [RentController::class, 'qrButuhPersetujuan'])->name('qrButuhSetuju');
+
+        Route::post('qrDipinjam', [RentController::class, 'qrDipinjam'])->name('qrDipinjam');
         Route::get('/catatan-dipinjam', [RentController::class, 'dipinjamIndex']);
         Route::get('/catatan-dipinjam/dikembalikan/{kode}', [RentController::class, 'dipinjamSelesai']);
 
         Route::get('/catatan-dikembalikan', [RentController::class, 'dikembalikanIndex']);
 
-
+        Route::post('qrTerlambat', [RentController::class, 'qrTerlambat'])->name('qrTerlambat');
         Route::get('/catatan-terlambat', [RentController::class, 'terlambatIndex']);
         Route::get('/catatan-terlambat/selesai/{kode}', [RentController::class, 'terlambatSelesai']);
 

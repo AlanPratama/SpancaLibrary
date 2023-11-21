@@ -52,11 +52,17 @@ class RentController extends Controller
 
 
 
-    public function butuhPersetujuan()
+    public function butuhPersetujuan(Request $request)
     {
-        $perizinan = RentLogs::where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users')->get();
 
-        $count = $perizinan->count();
+        if ($request->username) {
+            $perizinan = RentLogs::where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users', function($q) use($request) {
+                $q->where('username', 'LIKE', '%' .$request->username.'%');
+            })->get();
+
+        } else {
+            $perizinan = RentLogs::where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users')->get();
+        }
 
         return view('pages.admin.catatanPeminjaman.peminjaman.butuhPersetujuan', compact('perizinan'));
     }
@@ -79,6 +85,37 @@ class RentController extends Controller
 
         return redirect('/catatan-butuh-persetujuan')->with('status', 'PEMINJAMAN TELAH AKTIF');
     }
+
+    public function qrButuhPersetujuan(Request $request)
+    {
+        $rent = RentLogs::Where('kode', $request->qr_code)->where('status', 'Butuh Persetujuan')->whereHas('users')->whereHas('buku')->first();
+
+        if ($rent) {
+            $buku = Buku::where('id', $rent->buku->id)->first();
+            $buku->total_pinjam += 1;
+            $buku->save();
+
+            $rent->status = 'Dipinjam';
+            $rent->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'BERHASIL!',
+                'rent' => $rent
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'INVALID QR CODE! SILAHKAN SCAN ULANG!'
+            ]);
+        }
+    }
+
+
+
+
+
+
 
     public function peminjamanTidakSetuju($kode)
     {
@@ -129,7 +166,45 @@ class RentController extends Controller
     }
 
 
+    public function qrDipinjam(Request $request)
+    {
+        $rent = RentLogs::Where('kode', $request->qr_code)->where('status', 'Dipinjam')->whereHas('users')->whereHas('buku')->first();
 
+        if ($rent) {
+            $tanggal = Carbon::now()->toDateString();
+
+            if ($tanggal > $rent->tanggal_kembali) {
+                $rent->status = 'Terlambat';
+                $rent->save();
+
+                return response()->json([
+                    'status' => 'terlambat',
+                    'message' => 'BERHASIL!',
+                    'rent' => $rent
+                ]);
+
+            } else {
+                $rent->users->buku_id = null;
+                $rent->users->save();
+
+                $rent->status = 'Dikembalikan';
+                $rent->dikembalikan = $tanggal;
+                $rent->save();
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'BERHASIL!',
+                    'rent' => $rent
+                ]);
+            }
+            
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'INVALID QR CODE! SILAHKAN SCAN ULANG!'
+            ]);
+        }
+    }
 
 
 
@@ -179,7 +254,40 @@ class RentController extends Controller
         return redirect('/catatan-terlambat')->with('status', 'TERLAMBAT SELESAI');
     }
 
+    public function qrTerlambat(Request $request)
+    {
+        $rent = RentLogs::Where('kode', $request->qr_code)->where('status', 'Terlambat')->whereHas('users')->whereHas('buku')->first();
 
+        if ($rent) {
+            $tanggalKembali = Carbon::parse($rent->tanggal_kembali);
+            $tanggalSekarang = Carbon::now();
+    
+            $hariTerlambat = $tanggalKembali->diffInDays($tanggalSekarang);
+            $totalDenda = $hariTerlambat * 5000;
+            
+            $rent->users->buku_id = null;
+            $rent->users->save();
+    
+            $rent->hari_terlambat = $hariTerlambat;
+            $rent->denda = $totalDenda;
+            $rent->dikembalikan = Carbon::now()->toDateString();
+            $rent->status = 'Dikembalikan';
+            $rent->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'PEMINJAMAN TERLAMBAT TELAH SELESAI',
+                'rent' => $rent,
+            ]);
+            
+            
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'INVALID QR CODE! SILAHKAN SCAN ULANG!'
+            ]);
+        }
+    }
 
 
 

@@ -13,6 +13,8 @@ class Buku extends Model
     protected $table = 'buku';
 
     protected $fillable = [
+        'total_pinjam',
+        'total_download',
         'nama', 
         'slug',
         'pengarang', 
@@ -24,6 +26,7 @@ class Buku extends Model
         'gambar', 
         'kategori',
         'genre',
+        'link_ebook',
     ];
 
 

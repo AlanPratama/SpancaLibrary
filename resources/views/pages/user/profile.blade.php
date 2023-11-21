@@ -1,37 +1,67 @@
 @extends('layouts.main')
 
+@section('title', Auth::user()->username)
 
 @section('content')
     <style>
         .informasi{
+            min-width: 300px; 
+            margin-top: -60px;
+            width: 30%;
+        }
+
+        .informasi-form{
             min-width: 500px; 
+            width: 70%;
         }
 
         @media(max-width: 1000px) {
             .informasi{
-                min-width: 200px !important;
-                width: 95%;
-                padding: 10px 5px;
+                min-width: 100px !important;
+                width: 90%;
+            }
+
+            .informasi-form{
+                min-width: 100px !important;
+                width: 90%;
             }
         }
     </style>
     
-
+    @if (session('status'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "{{ session('status') }}"
+            });
+        </script>
+    @endif
 
 <div class="h-full bg-gray-200">
-    <div class="bg-white rounded-lg shadow-xl pb-8">
-        <div class="w-full h-[250px]">
-            <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg">
+    <div class="bg-white rounded-lg shadow-xl md:p-8 p-0">
+        <div class="w-full h-[280px]">
+            <img src="{{ asset('assets/profile-bg.jpg') }}" class="w-full h-full rounded-tl-lg rounded-tr-lg">
         </div>
         <div class="flex flex-wrap justify-center items-start w-full">
 
-            <div class="w-1/2 informasi" style="margin-top: -80px;">
+            <div class="informasi">
                 
                 <div class="flex flex-col items-center" >
-                    <img src="{{ asset('storage/'.Auth::user()->foto) }}" class="w-32 h-32 border-4 border-white rounded-full">
+                    <img src="{{ asset('storage/'.Auth::user()->foto) }}" class="w-32 max-w-32 min-w-32 h-32 max-h-32 min-h-32 border-4 border-white rounded-full border border-black">
                     <div class="flex justify-center items-center gap-8 w-full mt-4">
                         <div class="flex flex-col items-center">
-                            <p class="text-xl font-semibold">7</p>
+                            <p class="text-xl font-semibold">{{ $pinjamCount }}</p>
                             <p class="text-md">Meminjam</p>
                         </div>
 
@@ -41,15 +71,10 @@
                         </div>
 
                         <div class="flex flex-col items-center">
-                            <p class="text-xl font-semibold">7</p>
+                            <p class="text-xl font-semibold">{{ $pelanggaranCount }}</p>
                             <p class="text-md">Pelanggaran</p>
                         </div>
                     </div>
-                    @if (session('status'))
-                    <div class="mb-4 text-white bg-green-500 py-2 px-3 rounded-xl">
-                    {{ session('status') }}
-                    </div>
-                @endif
                 </div>
                 <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                     <div class="flex flex-col 2xl:w-1/3">
@@ -77,13 +102,27 @@
                                     <span class="text-gray-700">{{ Auth::user()->alamat }}</span>
                                 </li>
 
+                                <li class="flex flex-col gap-1 border-b py-2">
+                                    <a href="{{ url('histori-peminjaman/'. Auth::user()->slug) }}" class="text-semibold w-24 text-white bg-indigo-500 px-2 py-1 w-full rounded uppercase text-center">
+                                        <span class="">Histori Peminjaman</span>
+                                    </a>
+
+                                    <a href="{{ url('histori-peminjaman/'. Auth::user()->slug) }}" class="text-semibold w-24 text-white bg-green-500 px-2 py-1 w-full rounded uppercase text-center">
+                                        <span class="">Histori Izin eBook</span>
+                                    </a>
+
+                                    <a href="{{ url('histori-peminjaman/'. Auth::user()->slug) }}" class="text-semibold w-24 text-white bg-red-500 px-2 py-1 w-full rounded uppercase text-center">
+                                        <span class="">Histori Pelanggaran</span>
+                                    </a>
+                                </li>
+
                                 
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <form class="w-1/2 p-6 flex flex-col informasi" action="{{ route('profil.edit', ['slug' => Auth::user()->slug]) }}" method="post" enctype="multipart/form-data">
+            <form class="md:p-6 p-2 md:mb-0 mb-8 flex flex-col informasi-form" action="{{ route('profil.edit', ['slug' => Auth::user()->slug]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="mt-4">

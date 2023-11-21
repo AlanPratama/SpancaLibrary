@@ -15,16 +15,17 @@ class UserController extends Controller
         dd('ini profile');
     }
 
-    public function profileIndex()
+    public function profileIndex($slug)
     {
         $user = User::where('slug', Auth::user()->slug)->first();
+        $pinjamCount = RentLogs::where('user_id', $user->id)->where('status', 'Dikembalikan')->count();
+        $pelanggaranCount = RentLogs::where('user_id', $user->id)->where('denda', '!=', null) ->count();
 
-        if (Auth::user()->slug != $user->slug) {
+        if ($slug != $user->slug) {
             return redirect()->back();
         } else {
-            return view('pages.user.profile', compact('user'));
+            return view('pages.user.profile', compact('user', 'pinjamCount', 'pelanggaranCount'));
         }
-
     }
 
 
@@ -50,10 +51,10 @@ class UserController extends Controller
             $uploadedFile = $request->file('foto');
             $originalName = $uploadedFile->getClientOriginalName();
             $extension = $uploadedFile->getClientOriginalExtension();
-        
+
             // Generate nama file baru berdasarkan nama_tanggal.extension
             $newFileName = $data['username'] . '_' . now()->format('Ymd') . '.' . $extension;
-        
+
             // Simpan file dengan nama baru
             $gambarPath = $uploadedFile->storeAs('users', $newFileName);
             $data['foto'] = $gambarPath;
@@ -63,7 +64,7 @@ class UserController extends Controller
         $user->slug = null;
         $user->update($data);
 
-        return redirect('/setting/'.$request->username)->with('status', 'PROFIL BERHASIL DIPERBARUI');
+        return redirect('/setting/' . $request->username)->with('status', 'PROFIL BERHASIL DIPERBARUI');
     }
 
 
@@ -78,8 +79,14 @@ class UserController extends Controller
         $perizinan = RentLogs::where('user_id', Auth::user()->id)->where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users')->first();
         $dipinjam = RentLogs::where('user_id', Auth::user()->id)->where('status', 'Dipinjam')->whereHas('buku')->whereHas('users')->first();
 
+        $rent = RentLogs::where('user_id', Auth::user()->id)
+            ->where('status', 'Dikembalikan')
+            ->where('hari_terlambat', null)
+            ->where('denda', null)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('/pages.user.historiPeminjaman', compact('perizinan', 'dipinjam'));
+        return view('/pages.user.historiPeminjaman', compact('perizinan', 'dipinjam', 'rent'));
         // dd($perizinan);
     }
 }

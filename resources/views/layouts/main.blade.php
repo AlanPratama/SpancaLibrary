@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link rel="shortcut icon" href="assets/logo sekolah.jpg" type="image/x-icon"> --}}
     <link rel="shortcut icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivCy6wlBbMHY-Rqaj9Q2ISGB4U392sWzGi4aAlh4nOqz3PMxv8dlYUpylpnfUJioeRK2zQY3dXx4XTHJx6i4BDHKvNZOKrg2ZYGdMdieIs7PFOu9_appqVNu0lB95tCqZQ-cka6vV5YgIP6zUN0Pi7leHx9Hv5FhaqlgnbiTzlzbDjWpc4UNDlFJIRJWxC/s16000/logo%20sekolah.jpg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- jQuery -->
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
@@ -58,13 +59,16 @@
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                             aria-labelledby="dropdownLargeButton">
-                            <li> <a href="#"
+                            <li> <a href="{{ url('/kumpulan-buku') }}"
+                                    class="block px-4 py-2 bg-indigo-500 text-white">Semua Buku</a>
+                            </li>
+                            <li> <a href="{{ url('/kategori/novel') }}"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Novel</a>
                             </li>
-                            <li> <a href="#"
+                            <li> <a href="{{ url('/kategori/manga') }}"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Manga</a>
                             </li>
-                            <li> <a href="#"
+                            <li> <a href="{{ url('/kategori/study') }}"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study</a>
                             </li>
                         </ul>
@@ -72,7 +76,9 @@
                     </li>
                     @if (Auth::user())
                     <li> <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar2"
-                        class="flex items-center justify-between w-full py-2 pl-3 pr-4 uppercase text-blue-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">{{ Auth::user()->username }}
+                        class="flex items-center justify-between w-full py-2 pl-3 pr-4 uppercase text-blue-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        {{ Auth::user()->username }}
+                        <img src="{{ asset('storage/'.Auth::user()->foto) }}" alt="" class="ml-1 shadow w-7 max-w-7 min-w-7 h-7 max-h-7 min-h-7 border rounded-full">
                         <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -82,11 +88,11 @@
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                             aria-labelledby="dropdownLargeButton">
+                            <li> <a href="{{ url('/setting/'. Auth::user()->slug) }}"
+                                class="block px-4 py-2 bg-indigo-500 text-white">Profile</a>
+                            </li>
                             <li> <a href="{{ url('/histori-peminjaman/'.Auth::user()->slug) }}"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Histori Peminjaman</a>
-                            </li>
-                            <li> <a href="{{ url('logout') }}"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
                             </li>
 
                             <li> <a href="{{ url('logout') }}"
