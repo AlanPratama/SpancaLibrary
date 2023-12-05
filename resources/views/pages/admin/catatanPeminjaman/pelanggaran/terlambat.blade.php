@@ -125,7 +125,7 @@
                             <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white"
                                 style="padding: 0px 20px;">
                                 <div class="flex gap-2">
-                                    <img src="{{ asset('/storage/' . $item->users->foto) }}" class="rounded"
+                                    <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}" class="rounded"
                                         style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px;"
                                         alt="Apple Watch">
                                     <div class="flex flex-col items-start">
@@ -139,7 +139,7 @@
                                 style="padding: 0px 20px;">
                                 <div class="py-2 flex flex-col justify-center items-center w-full">
                                     <img src="{{ asset('/storage/' . $item->buku->gambar) }}" class="rounded"
-                                        style="width: 60px; max-width: 60px;" alt="Apple Watch">
+                                        style="width: 60px; max-width: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" alt="foto">
                                     <p class="text-md"
                                         style="-webkit-line-clamp: 1;
                         overflow: hidden;

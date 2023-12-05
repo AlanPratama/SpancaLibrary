@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/buku/{slug}', [RentController::class, 'pinjamBuku'])->name('pinjam.buku');
     Route::get('/histori-peminjaman/{slug}', [UserController::class, 'indexHistori']);
+    Route::get('/histori-pelanggaran/{slug}', [UserController::class, 'indexPelanggaran']);
+
 
     Route::post('izin.ebook/{slug}', [RentController::class, 'izinEbook'])->name('izin.ebook');
 
@@ -70,8 +72,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'index']);
         Route::get('/daftar-user', [UserController::class, 'dUser']);
-        Route::get('/edit-user/{slug}', [UserController::class, 'editUser']);
-        Route::post('/edit-user/{slug}', [UserController::class, 'editUserProcess'])->name('edit.user');
+        Route::get('/edit-user/{slug}', [UserController::class, 'editUser'])->name('editIndex.user');
+        Route::put('/edit-user/{slug}', [UserController::class, 'editUserProcess'])->name('edit.user');
         Route::delete('/delete-user/{slug}', [UserController::class, 'deleteUser'])->name('delete.user');
 
 

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivCy6wlBbMHY-Rqaj9Q2ISGB4U392sWzGi4aAlh4nOqz3PMxv8dlYUpylpnfUJioeRK2zQY3dXx4XTHJx6i4BDHKvNZOKrg2ZYGdMdieIs7PFOu9_appqVNu0lB95tCqZQ-cka6vV5YgIP6zUN0Pi7leHx9Hv5FhaqlgnbiTzlzbDjWpc4UNDlFJIRJWxC/s16000/logo%20sekolah.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/logo sekolah.jpg') }}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </head>
@@ -116,7 +116,7 @@
                  </a>
               </li>
               <li>
-                 <a href="{{ url('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                 <a href="{{ url('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white text-gray-700 hover:bg-gray-100 dark:text-white group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                     </svg>
@@ -125,7 +125,7 @@
               </li>
               <hr>
               <li>
-               <a href="{{ url('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+               <a href="{{ url('/') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white text-gray-700 hover:bg-gray-100 dark:text-white group">
                   <i class="fa-solid fa-pager w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-2xl"></i>
                   <span class="flex-1 ml-3 whitespace-nowrap">Pages</span>
                </a>
@@ -158,10 +158,10 @@
             @yield('tambahBuku')
             @yield('dBuku')
             @yield('content')
+            @yield('dUser')
 
          </div>
          <div class="flex items-center justify-strech w-full h-48 mb-4 roundedg b-gray-50 dark:bg-gray-800">
-            @yield('dUser')
          </div>
       </div>
      </div>

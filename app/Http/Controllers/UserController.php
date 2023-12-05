@@ -6,6 +6,7 @@ use App\Models\RentLogs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -16,11 +17,73 @@ class UserController extends Controller
         return view('pages.admin.dUser', compact('users'));
     }
 
-    public function deleteUser(Request $request, $slug)
+    public function editUser($slug)
+    {
+        $user = User::where('slug', $slug)->first();
+        return view('pages.admin.user.editUser', compact('user'));
+    }
+
+    public function editUserProcess(Request $request, $slug)
     {
         $user = User::where('slug', $slug)->first();
 
+        $data = $request->validate([
+            'username' => 'required|min:6|unique:users,username,'.$user->id,
+            'nama'     => 'required',
+            'email'      => 'required|unique:users,email,'.$user->id,
+            'telepon'  => 'required|min:8|unique:users,telepon,'.$user->id,
+            'foto'  => '',
+            'alamat'  => 'required',
+        ]);
+
+        $gambarSebelum = $user->foto;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('foto')) {
+            if ($gambarSebelum) {
+                Storage::delete($gambarSebelum);
+            }
+            $uploadedFile = $request->file('foto');
+            $originalName = $uploadedFile->getClientOriginalName();
+            $extension = $uploadedFile->getClientOriginalExtension();
+
+            // Generate nama file baru berdasarkan nama_tanggal.extension
+            $newFileName = $data['username'] . '_' . now()->format('Ymd') . '.' . $extension;
+
+            // Simpan file dengan nama baru
+            $gambarPath = $uploadedFile->storeAs('users', $newFileName);
+            $path = $gambarPath;
+        }
+
+        // Update attributes
+        $user->username = $request->username;
+        $user->nama = $request-> nama;
+        $user->email = $request-> email;
+        $user->telepon = $request-> telepon;
+        $user->alamat = $request-> alamat;
+        $user->role_id = $request-> role_id;
+        $user->foto = $path;
+
+        $user->slug = null;
+        $user->update();
+
+        return redirect('/daftar-user')->with('status', 'AKUN USER BERHASIL DIPERBARUI');
+    }
+
+
+    public function deleteUser(Request $request, $slug)
+    {
+        $user = User::where('slug', $slug)->first();
+        $rent = RentLogs::where('user_id', $user->id)->get();
         
+        if ($rent->count() > 0) {
+            foreach ($rent as $item) {
+                $item->delete();
+            }
+        }
         $user->delete();
         
         return redirect('/daftar-user')->with('status', 'USER BERHASIL DIHAPUS');
@@ -69,10 +132,10 @@ class UserController extends Controller
         $user = User::where('slug', $slug)->first();
 
         $data = $request->validate([
-            'username' => 'required',
+            'username' => 'required|min:6|unique:users,username,'.$user->id,
             'nama'     => 'required',
-            'email'      => 'required',
-            'telepon'  => 'required',
+            'email'      => 'required|unique:users,email,'.$user->id,
+            'telepon'  => 'required|min:8|unique:users,telepon,'.$user->id,
             'foto'  => '',
             'alamat'  => 'required',
         ]);
@@ -121,7 +184,21 @@ class UserController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('/pages.user.historiPeminjaman', compact('perizinan', 'dipinjam', 'rent'));
+        return view('pages.user.historiPeminjaman', compact('perizinan', 'dipinjam', 'rent'));
+        // dd($perizinan);
+    }
+
+    public function indexPelanggaran()
+    {
+        $terlambat = RentLogs::where('user_id', Auth::user()->id)->where('status', 'Terlambat')->whereHas('buku')->whereHas('users')->first();
+
+
+        $pelanggaran = RentLogs::where('user_id', Auth::user()->id)
+            ->where('denda', '!=', null)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('/pages.user.historiPelanggaran', compact('pelanggaran', 'terlambat'));
         // dd($perizinan);
     }
 }

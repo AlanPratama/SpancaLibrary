@@ -17,7 +17,7 @@
 
     .mother-container-detailBukus {
         height: auto;
-        margin: 100px 0px 0px 0px;
+        margin: 100px 0px;
     }
 
     .container-detailBukus {
@@ -155,7 +155,7 @@
         display: none
     }
 
-    .banner{
+    .banner {
         width: 80%;
     }
 
@@ -212,7 +212,8 @@
             width: 100%;
             height: auto;
         }
-        .banner{
+
+        .banner {
             width: 90%;
         }
 
@@ -248,7 +249,7 @@
 </style>
 
 @section('content')
-@if (session('status'))
+    @if (session('status'))
         <script>
             const Toast = Swal.mixin({
                 toast: true,
@@ -267,89 +268,50 @@
             });
         </script>
     @endif
-    
-    @if ($perizinan)
+
+    @if ($terlambat)
         <div class="mother-container-detailBukus">
             <div class="flex justify-center lg:mb-6 mb-2">
                 <div class="flex justify-between items-center border banner" style="border-color: black;">
-                    <div class="banner-status bg-green-500 text-white px-3 py-2">
-                        <p class="text-center text-xl">BUTUH PERSETUJUAN</p>
+                    <div class="banner-status bg-red-500 text-white px-3 py-2">
+                        <p class="text-center text-xl">TERLAMBAT</p>
                     </div>
                     <div class="banner-informasi bg-white  px-3 py-2">
-                        <p class="text-center text-xl ">SILAHKAN TEMUI PETUGAS UNTUK MENDAPATKAN PERSETUJUAN</p>
+                        <p class="text-center text-xl ">KAMU TERLAMBAT MENGEMBALIKAN BUKU</p>
                     </div>
                 </div>
             </div>
             <div class="container-detailBukus h-full w-full">
                 <div class="image">
-                    <img src="{{ asset('storage/' . $perizinan->buku->gambar) }}" class="w-100" alt="Buku Gambar">
+                    <img src="{{ asset('storage/' . $terlambat->buku->gambar) }}" class="w-100" alt="Buku Gambar">
                 </div>
                 <div class="text">
-                    <h3>{{ $perizinan->buku->nama }}</h3>
+                    <h3>{{ $terlambat->buku->nama }}</h3>
                     <hr class="h-px rounded mt-4 bg-gray-400 border-0 dark:bg-gray-700">
-                    <p><span>Pengarang:</span> {{ $perizinan->buku->pengarang }}</p>
-                    <p><span>Penerbit:</span> {{ $perizinan->buku->penerbit }}</p>
-                    <p><span>Halaman:</span> {{ $perizinan->buku->halaman }}</p>
-                    <p><span>Tahun Terbit:</span> {{ $perizinan->buku->tahun_terbit }}</p>
-                    <p><span>Kategori:</span> {{ $perizinan->buku->kategori }}</p>
-                    <p><span>Genre:</span> {{ $perizinan->buku->genre }}</p>
+                    <p><span>Pengarang:</span> {{ $terlambat->buku->pengarang }}</p>
+                    <p><span>Penerbit:</span> {{ $terlambat->buku->penerbit }}</p>
+                    <p><span>Halaman:</span> {{ $terlambat->buku->halaman }}</p>
+                    <p><span>Tahun Terbit:</span> {{ $terlambat->buku->tahun_terbit }}</p>
+                    <p><span>Kategori:</span> {{ $terlambat->buku->kategori }}</p>
+                    <p><span>Genre:</span> {{ $terlambat->buku->genre }}</p>
                 </div>
                 <div class="lg:mt-0 mt-4 qr-code flex flex-col items-center justify-center">
                     <div class="flex flex-col items-center justify-center gap-3 px-4 py-3 rounded"
                         style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
                         <span>
-                            {!! QrCode::size(200)->generate($perizinan->kode) !!}
+                            {!! QrCode::size(200)->generate($terlambat->kode) !!}
                         </span>
                         <span class="text-lg">
-                            {{ $perizinan->kode }}
+                            {{ $terlambat->kode }}
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-    @elseif($dipinjam)
-    <div class="mother-container-detailBukus">
-        <div class="flex justify-center lg:mb-6 mb-2">
-            <div class="flex justify-between items-center border banner" style="border-color: black;">
-                <div class="banner-status bg-indigo-500 text-white px-3 py-2">
-                    <p class="text-center text-xl">DIPINJAM</p>
-                </div>
-                <div class="banner-informasi bg-white  px-3 py-2">
-                    <p class="text-center text-xl ">SELAMAT MEMBACA! JAGA BUKU DENGAN BAIK YA!</p>
-                </div>
-            </div>
-        </div>
-        <div class="container-detailBukus h-full w-full">
-            <div class="image">
-                <img src="{{ asset('storage/' . $dipinjam->buku->gambar) }}" class="w-100" alt="Buku Gambar">
-            </div>
-            <div class="text">
-                <h3>{{ $dipinjam->buku->nama }}</h3>
-                <hr class="h-px rounded mt-4 bg-gray-400 border-0 dark:bg-gray-700">
-                <p><span>Pengarang:</span> {{ $dipinjam->buku->pengarang }}</p>
-                <p><span>Penerbit:</span> {{ $dipinjam->buku->penerbit }}</p>
-                <p><span>Halaman:</span> {{ $dipinjam->buku->halaman }}</p>
-                <p><span>Tahun Terbit:</span> {{ $dipinjam->buku->tahun_terbit }}</p>
-                <p><span>Kategori:</span> {{ $dipinjam->buku->kategori }}</p>
-                <p><span>Genre:</span> {{ $dipinjam->buku->genre }}</p>
-            </div>
-            <div class="lg:mt-0 mt-4 qr-code flex flex-col items-center justify-center">
-                <div class="flex flex-col items-center justify-center gap-3 px-4 py-3 rounded"
-                    style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <span>
-                        {!! QrCode::size(200)->generate($dipinjam->kode) !!}
-                    </span>
-                    <span class="text-lg">
-                        {{ $dipinjam->kode }}
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
     @else
         <div class="flex flex-col justify-center items-center" style="margin: 100px 0px;">
             <img src="{{ asset('assets/no-data.jpg') }}" class="w-48 h-48" alt="">
-            <h3>TIDAK ADA DATA PEMINJAMAN</h3>
+            <h3>TIDAK ADA DATA PELANGGARAN</h3>
         </div>
     @endif
 
@@ -404,14 +366,17 @@
                             Tanggal Kembali
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Denda
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Status
                         </th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @if ($rent->count() > 0)
-                        @foreach ($rent as $item)
+                    @if ($pelanggaran->count() > 0)
+                        @foreach ($pelanggaran as $item)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td class="p-4">
@@ -430,7 +395,8 @@
                                     style="padding: 0px 30px;">
                                     <div class="py-2 flex flex-col justify-center items-center w-full">
                                         <img src="{{ asset('/storage/' . $item->buku->gambar) }}" class="rounded"
-                                            style="width: 60px; max-width: 60px;" alt="Apple Watch">
+                                            style="width: 60px; max-width: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                                            alt="Apple Watch">
                                         <p class="text-md"
                                             style="-webkit-line-clamp: 1;
                                                     overflow: hidden;
@@ -449,7 +415,20 @@
                                 </td>
 
                                 <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
-                                    {{ $item->status }}
+                                    Rp {{ number_format($item->denda, 0, ',', '.') }}
+                                </td>
+
+                                <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
+                                    <div class="flex justify-center items-center gap-2">
+                                        @if ($item->status == 'Hilang')
+                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>{{ $item->status }}
+                                        @elseif($item->status == 'Rusak')
+                                            <div class="h-2.5 w-2.5 rounded-full bg-yellow-500 me-2"></div>
+                                            {{ $item->status }}
+                                        @elseif($item->status == 'Dikembalikan')
+                                            <div class="h-2.5 w-2.5 rounded-full bg-yellow-300 me-2"></div> Terlambat ({{ $item->hari_terlambat }})
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -460,7 +439,7 @@
                                 <div class="flex flex-col justify-center items-center gap-2">
                                     <img src="{{ asset('assets/no-data.jpg') }}" class="w-32 h-32" alt="">
 
-                                    <p>TIDAK ADA DATA PEMINJAMAN</p>
+                                    <p>TERIMA KASIH SUDAH TERTIB</p>
                                 </div>
                             </td>
                         </tr>

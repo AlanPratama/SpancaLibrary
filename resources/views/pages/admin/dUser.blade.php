@@ -3,9 +3,55 @@
 @section('title', 'Daftar User')
 
 @section('dUser')
-    
-<div class="mt-14 w-full relative overflow-x-auto shadow-md sm:rounded-lg">
-    @csrf
+@if (session('status'))
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: "{{ session('status') }}"
+    });
+</script>
+@endif
+<div class="flex justify-between items-center">
+    <button data-modal-target="qr-modal" data-modal-toggle="qr-modal"
+        class="w-auto block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">
+        <i class="fa-solid fa-qrcode text-white -ml-1 mr-2"></i>QR SCANNER
+    </button>
+
+
+    <form class="flex items-center">
+        <label for="search-username" class="sr-only">Search</label>
+        <div class="relative w-full">
+            <input type="text" id="search-username" name="username"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Cari Pengguna..." required>
+        </div>
+        <button type="submit"
+            class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+            <span class="sr-only">Search</span>
+        </button>
+    </form>
+
+
+
+</div>
+<div class=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -72,7 +118,7 @@
                                     <i
                                         class="fa-solid fa-circle-info font-medium text-white text-lg bg-blue-500 rounded p-2"></i>
                                 </a>
-                                <a href="{{ route('edit.user', ['slug' => $user->slug]) }}" class="">
+                                <a href="{{ route('editIndex.user', ['slug' => $user->slug]) }}" class="">
                                     <i
                                         class="fa-solid fa-pen-to-square font-medium text-white text-lg bg-green-500 rounded p-2"></i>
                                 </a>
@@ -106,6 +152,8 @@
         </tbody>
     </table>
 </div>
+
+
 <script>
     function deleteUser(route) {
         Swal.fire({
