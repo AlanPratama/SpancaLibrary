@@ -1,14 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Novel')
+@section('title', 'Manga')
 <style>
-    nav {
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        position: fixed;
-        top: 0;
-        z-index: 999;
-        width: 100%;
-    }
-
     body {
         user-select: none;
     }
@@ -50,7 +42,7 @@
         flex-wrap: wrap !important;
         justify-content: center !important;
         gap: 0px;
-        align-items: end;
+        align-items: center;
     }
 
     .container-buku-user .buku-cover {
@@ -83,10 +75,15 @@
         height: 320px;
         width: 100%;
         border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
 
     .container-buku-user .buku-cover .text-detail {
         width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+
     }
 
     .container-buku-user .buku-cover .text-detail h3 {
@@ -132,203 +129,112 @@
 
         .container-buku-user {
             margin: 0px 0px;
+            gap: 8px;
+            justify-content: space-evenly
         }
 
         .container-buku-user .buku-cover {
-            min-width: 300px;
+            min-width: 140px;
             width: auto;
-            display: flex;
-            justify-content: center;
         }
 
         .container-buku-user .buku-cover .cover {
-            width: 280px;
+            width: 130px;
             aspect-ratio: 75:118;
         }
 
         .container-buku-user .buku-cover .cover img {
             /* aspect-ratio: 75:118; */
-            height: 380px;
+            height: 190px;
             width: 100%;
             border-radius: 10px;
         }
 
         .container-buku-user .buku-cover .text-detail {
-            width: 280px;
+            width: 130px;
+        }
+
+        .container-buku-user .buku-cover .text-detail p {
+            font-size: 18px;
+            color: #161616ab;
+            margin-bottom: 4px
         }
 
     }
 </style>
-@section('kategoriManga_User')
-    <div class="mother-buku-user one">
-        <h3 class="judul">Daftar Buku <span>Novel</span></h3>
-        <div class="container-buku-user">
-            @foreach ($mangas as $manga)
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
+@section('bukuUser')
+<div class="mother-buku-user one">
+    <h3 class="judul text-center">Daftar Buku <span>Manga</span></h3>
+    <div class="flex justify-center items-center w-full" style="margin-bottom: 30px;">
+        <div class="flex justify-center md:items-center items-start gap-4" style="width: 80%;">
+            <button id="filterDrop" data-dropdown-toggle="dropdown"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">Filter <svg class="w-2.5 h-2.5  ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdown"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="filterDrop">
+                    <form>
+                        <li>
+                            <button name="kategori" value="novel" type="submit"
+                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Novel
+                            </button>
+                        </li>
+                        <li>
+                            <button name="kategori" value="manga" type="submit"
+                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Manga
+                            </button>
+                        </li>
+                        <li>
+                            <button name="kategori" value="study" type="submit"
+                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
+                            </button>
+                        </li>
+                    </form>
+                </ul>
+            </div>
+
+            <form class="flex items-center w-full">
+                <label for="search-username" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <input type="text" id="search-username" name="username"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Cari Buku...">
                 </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="buku-cover">
-                    <a href="{{ $manga->id }}">
-                        <div class="cover">
-                            <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
-                        </div>
-                        <div class="text-detail">
-                            <h3>{{ $manga->nama }}</h3>
-                            <p>{{ $manga->pengarang }}</p>
-                            <button>{{ $manga->kategori }}</button>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+                <button type="submit"
+                    class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+
         </div>
-
     </div>
-    {{-- <img src="{{ asset('storage/' . $buku->gambar) }}" class="w-100" alt="Buku Gambar"> --}}
-
-    {{-- <div class="container-detailBuku h-full w-full">
-    <div class="image"> 
-        <img src="{{ asset('storage/' . $buku->gambar) }}" class="w-100" alt="Buku Gambar">
-    </div>
-    <div class="text">
-        <h3>{{ $buku->nama }}</h3>
-        <p><span>Pengarang:</span> {{ $buku->pengarang }}</p>
-        <p><span>Penerbit:</span> {{ $buku->penerbit }}</p>
-        <p><span>Halaman:</span> {{ $buku->halaman }}</p>
-        <p><span>Kategori:</span> {{ $buku->kategori }}</p>
-        <p><span>Genre:</span> {{ $buku->genre }}</p>
-        <p><span>Tahun Terbit:</span> {{ $buku->tahun_terbit }}</p>
+    <div class="container-buku-user">
+        @foreach ($mangas as $manga)
+            <div class="buku-cover">
+                <a href="/detail-buku/{{ $manga->slug }}">
+                    <div class="cover">
+                        <img src="{{ asset('storage/' . $manga->gambar) }}" alt="">
+                    </div>
+                    <div class="text-detail">
+                        <h3>{{ $manga->nama }}</h3>
+                        <p>{{ $manga->pengarang }}</p>
+                        <button>{{ $manga->kategori }}</button>
+                    </div>
+                </a>
+            </div>
+        @endforeach
     </div>
 </div>
-<div class="bungkus-deskripsi">
-    <p class="deskripsi"><span >Deskripsi:</span> <br>{{ $buku->deskripsi }}</p>
-</div> --}}
 @endsection

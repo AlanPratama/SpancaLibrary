@@ -43,7 +43,47 @@
             });
         </script>
     @endif
+    <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-center items-center gap-2">
+            <a href="{{ url('/pdf/peminjaman/rusak') }}">
+                <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    type="button">
+                    <i class="fa-regular fa-file-pdf text-lg text-white -ml-1 mr-2"></i>LIHAT PDF
+                </button>
+            </a>
 
+            <a href="{{ url('/pdf/peminjaman/rusak-download') }}">
+                <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                    class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    type="button">
+                    <i class="fa-solid fa-download text-lg text-white -ml-1 mr-2"></i>CETAK PDF
+                </button>
+            </a>
+        </div>
+
+
+        <form class="flex items-center">
+            <label for="search-username" class="sr-only">Search</label>
+            <div class="relative w-full">
+                <input type="text" id="search-username" name="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Cari Pengguna..." required>
+            </div>
+            <button type="submit"
+                class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+                <span class="sr-only">Search</span>
+            </button>
+        </form>
+
+
+
+    </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

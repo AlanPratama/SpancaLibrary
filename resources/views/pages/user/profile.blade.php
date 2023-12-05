@@ -51,14 +51,14 @@
 <div class="h-full bg-gray-200">
     <div class="bg-white rounded-lg shadow-xl md:p-8 p-0">
         <div class="w-full h-[280px]">
-            <img src="{{ asset('assets/profile-bg.jpg') }}" class="w-full h-full rounded-tl-lg rounded-tr-lg">
+            <img src="{{ asset('assets/profile-bg.jpg') }}" class="rounded-tl-lg rounded-tr-lg">
         </div>
         <div class="flex flex-wrap justify-center items-start w-full">
 
             <div class="informasi">
                 
                 <div class="flex flex-col items-center" >
-                    <img src="{{ (Auth::user()->foto == null ? asset('assets/no-img.jpg') : asset('storage/'.Auth::user()->foto)) }}" class="bg-white w-32 max-w-32 min-w-32 h-32 max-h-32 min-h-32 border-4 border-gray-500 rounded-full border border-black" id="imagePreview">
+                    <img src="{{ (Auth::user()->foto == null ? asset('assets/no-img.jpg') : asset('storage/'.Auth::user()->foto)) }}" style="width: 120px; max-width: 120px; min-width: 120px;  height: 120px; max-height: 120px; min-height: 120px;" class="bg-white border-4 border-gray-500 rounded-full border border-black" id="imagePreview">
                     <div class="flex justify-center items-center gap-8 w-full mt-4">
                         <div class="flex flex-col items-center">
                             <p class="text-xl font-semibold">{{ $pinjamCount }}</p>
@@ -111,7 +111,7 @@
                                         <span class="">Histori Izin eBook</span>
                                     </a>
 
-                                    <a href="{{ url('histori-peminjaman/'. Auth::user()->slug) }}" class="text-semibold w-24 text-white bg-red-500 px-2 py-1 w-full rounded uppercase text-center">
+                                    <a href="{{ url('histori-pelanggaran/'. Auth::user()->slug) }}" class="text-semibold w-24 text-white bg-red-500 px-2 py-1 w-full rounded uppercase text-center">
                                         <span class="">Histori Pelanggaran</span>
                                     </a>
                                 </li>

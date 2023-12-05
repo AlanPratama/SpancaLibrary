@@ -28,11 +28,11 @@
 
         th {
             background-color: #f2f2f2;
-            font-size: 15px;
+            font-size: 13px;
         }
 
         td{
-            font-size: 14px;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -40,12 +40,12 @@
     <center>
         <div class="header">
             <img src="{{ public_path('assets/65.png') }}" alt="" style="width: 100px;">
-            <h1>SPANCA LIBRARY - STATUS DIPINJAM</h1>
+            <h1>SPANCA LIBRARY - STATUS TERLAMBAT</h1>
         </div>
     </center>
-    <p style="font-size: 18px;"><span style="font-weight: 600;">Total Peminjaman: </span>{{ $dipinjam->count() }}</p>
+    <p style="font-size: 18px;"><span style="font-weight: 600;">Total Peminjaman: </span>{{ $terlambat->count() }}</p>
     </p>
-    <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+    <table>
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -61,16 +61,22 @@
                     Buku
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Tanggal Pinjam
+                    Tgl. Pinjam
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Tanggal Kembali
+                    Tgl. Kembali
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Dikembalikan
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Denda
                 </th>
             </tr>
         </thead>
         <tbody>
 
-                @foreach ($dipinjam as $item)
+                @foreach ($terlambat as $item)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="p-4">
@@ -88,7 +94,7 @@
                                     class="w-16 max-w-16 h-16 max-h-16 rounded"
                                     style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; border: 1px solid #99999999;
                                     border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
-                                    alt="foto">
+                                    alt="Apple Watch">
                                 <div class="flex flex-col items-start">
                                     <p>{{ $item->users->nama }}</p>
                                 </div>
@@ -109,9 +115,19 @@
                         <td class="notNum px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
                             {{ $item->tanggal_pinjam }}
                         </td>
-
                         <td class="notNum px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
                             {{ $item->tanggal_kembali }}
+                        </td>
+
+                        <td class="notNum px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
+                            {{ $item->dikembalikan }}
+                            
+                        </td>
+
+                        <td class="notNum px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
+                            {{'Rp '. number_format($item->denda, 0, ',', '.') }}
+                            <br>
+                            ({{ $item->hari_terlambat }} Hari)
                         </td>
                     </tr>
                 @endforeach

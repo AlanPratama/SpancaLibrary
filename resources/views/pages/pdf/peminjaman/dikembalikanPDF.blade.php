@@ -26,16 +26,13 @@
             padding: 10px 5px;
         }
 
-        .notNum {
-            padding: 25px 20px;
-        }
-
         th {
             background-color: #f2f2f2;
+            font-size: 15px;
         }
 
         td{
-            font-size: 15px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -89,8 +86,9 @@
                             <div class="flex gap-2">
                                 <img src="{{ $item->users->foto == null ? public_path('assets/no-img.jpg') : public_path('/storage/' . $item->users->foto) }}"
                                     class="w-16 max-w-16 h-16 max-h-16 rounded"
-                                    style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
-                                    alt="Apple Watch">
+                                    style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; border: 1px solid #99999999;
+                                    border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                                    alt="foto">
                                 <div class="flex flex-col items-start">
                                     <p>{{ $item->users->nama }}</p>
                                 </div>
@@ -100,7 +98,8 @@
                         <td class="notNum px-6 py-4  font-semibold text-gray-500 font-medium dark:text-white">
                             <div class="py-2 flex flex-col justify-center items-center w-full">
                                 <img src="{{ public_path('/storage/' . $item->buku->gambar) }}" class="rounded"
-                                    style="width: 60px; max-width: 60px; margin-top: 6px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                                    style="width: 60px; max-width: 60px; margin-top: 6px; border: 1px solid #99999999;
+                                    border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
                                     alt="Buku">
                                 <p class="text-md">
                                     {{ $item->buku->nama }}</p>

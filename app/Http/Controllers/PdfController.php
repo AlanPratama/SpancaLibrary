@@ -58,7 +58,7 @@ class PdfController extends Controller
             ->get();
 
 
-        $pdf = PDF::loadView('pages.pdf.peminjaman.terlambatPDF', compact('terlambat'));
+        $pdf = PDF::loadView('pages.pdf.pelanggaran.terlambatPDF', compact('terlambat'));
         return $pdf->stream('SpancaLibrary_terlambat.pdf');
     }
 
@@ -69,17 +69,53 @@ class PdfController extends Controller
             ->get();
 
 
-        $pdf = PDF::loadView('pages.pdf.peminjaman.terlambatPDF', compact('terlambat'));
+        $pdf = PDF::loadView('pages.pdf.pelanggaran.terlambatPDF', compact('terlambat'));
         return $pdf->download('SpancaLibrary_terlambat.pdf');
     }
 
 
     public function pdfPeminjamanRusak()
     {
+        $rusak = RentLogs::where('status', 'Rusak')
+            ->where('denda', '!=', null)
+            ->get();
+
+
+        $pdf = PDF::loadView('pages.pdf.pelanggaran.rusakPDF', compact('rusak'));
+        return $pdf->stream('SpancaLibrary_rusak.pdf');
+    }
+
+    public function pdfPeminjamanRusakDownload()
+    {
+        $rusak = RentLogs::where('status', 'Rusak')
+            ->where('denda', '!=', null)
+            ->get();
+
+
+        $pdf = PDF::loadView('pages.pdf.pelanggaran.rusakPDF', compact('rusak'));
+        return $pdf->download('SpancaLibrary_rusak.pdf');
     }
 
 
     public function pdfPeminjamanHilang()
     {
+        $hilang = RentLogs::where('status', 'Hilang')
+            ->where('denda', '!=', null)
+            ->get();
+
+
+        $pdf = PDF::loadView('pages.pdf.pelanggaran.hilangPDF', compact('hilang'));
+        return $pdf->stream('SpancaLibrary_hilang.pdf');
+    }
+
+    public function pdfPeminjamanHilangDownload()
+    {
+        $hilang = RentLogs::where('status', 'Hilang')
+            ->where('denda', '!=', null)
+            ->get();
+
+
+        $pdf = PDF::loadView('pages.pdf.pelanggaran.hilangPDF', compact('hilang'));
+        return $pdf->download('SpancaLibrary_hilang.pdf');
     }
 }

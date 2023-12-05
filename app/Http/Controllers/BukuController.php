@@ -192,7 +192,7 @@ class BukuController extends Controller
 
     public function study(Request $request)
     {
-        $studys = Buku::where('kategori', 'Study')->get();
+        $studys = Buku::where('kategori', 'Novel')->get();
 
         return view('pages.kategoriStudy_User', compact('studys'));
     }
