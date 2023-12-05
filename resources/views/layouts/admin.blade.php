@@ -38,38 +38,20 @@
                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivCy6wlBbMHY-Rqaj9Q2ISGB4U392sWzGi4aAlh4nOqz3PMxv8dlYUpylpnfUJioeRK2zQY3dXx4XTHJx6i4BDHKvNZOKrg2ZYGdMdieIs7PFOu9_appqVNu0lB95tCqZQ-cka6vV5YgIP6zUN0Pi7leHx9Hv5FhaqlgnbiTzlzbDjWpc4UNDlFJIRJWxC/s16000/logo%20sekolah.jpg" class="w-1/2" alt="">
             </li>
               <li>
-                 <a href="{{ url('dashboard') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                 <a href="{{ url('dashboard') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('dashboard') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                    <svg class="w-5 h-5 {{ Request::is('dashboard') ? 'text-white' : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }} transition duration-75 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                        <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                        <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
                     </svg>
                     <span class="ml-3">Dashboard</span>
                  </a>
               </li>
-              <li>
-                 <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                  <i class="fa-solid fa-user text-2xl text-gray-500"></i>
-                       <span class="flex-1 ml-3 text-left whitespace-nowrap">User</span>
-                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                       </svg>
-                 </button>
-                 <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                       <li>
-                          <a href="{{ url('daftar-user') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Daftar User</a>
-                          
-                       </li>
-                       <li>
-                          <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Daftar Pelanggaran</a>
-                       </li>
-                 </ul>
-              </li>
 
               <li>
-               <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="catatan" data-collapse-toggle="catatan">
-                  <i class="fa-solid fa-clipboard text-2xl text-gray-500"></i>
-                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Catatan Peminjaman</span>
-                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+               <button type="button" class="flex items-center w-full p-2 text-base {{ Request::is('catatan-butuh-persetujuan') || Request::is('catatan-dipinjam') || Request::is('catatan-dikembalikan') ? 'text-white bg-blue-500' : 'text-gray-500 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} transition duration-75 rounded-lg group " aria-controls="catatan" data-collapse-toggle="catatan">
+                  <i class="fa-solid fa-clipboard text-2xl {{ Request::is('catatan-butuh-persetujuan') || Request::is('catatan-dipinjam') || Request::is('catatan-dikembalikan') ? 'text-white' : 'text-gray-500' }}"></i>
+                     <span class="flex-1 ml-3 text-left whitespace-nowrap {{ Request::is('catatan-butuh-persetujuan') || Request::is('catatan-dipinjam') || Request::is('catatan-dikembalikan') ? 'text-white' : 'text-gray-700' }}">Catatan Peminjaman</span>
+                     <svg class="w-3 h-3 {{ Request::is('catatan-butuh-persetujuan') || Request::is('catatan-dipinjam') || Request::is('catatan-dikembalikan') ? 'text-white' : 'text-gray-500' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                      </svg>
                </button>
@@ -91,9 +73,9 @@
 
 
             <li>
-               <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="catatan-pelanggaran" data-collapse-toggle="catatan-pelanggaran">
-                  <i class="fa-solid fa-clipboard text-2xl text-gray-500"></i>
-                     <span class="flex-1 ml-3 text-left whitespace-nowrap">Catatan Pelanggaran</span>
+               <button type="button" class="flex items-center w-full p-2 transition duration-75 rounded-lg group {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white bg-blue-500' : 'text-gray-500 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="catatan-pelanggaran" data-collapse-toggle="catatan-pelanggaran">
+                  <i class="fa-solid fa-clipboard text-2xl "></i>
+                     <span class="flex-1 ml-3 text-left whitespace-nowrap {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">Catatan Pelanggaran</span>
                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                      </svg>
@@ -115,30 +97,39 @@
             </li>
 
               <li>
-                 <a href="{{ url('daftar-buku') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <i class="fa-solid fa-book text-2xl text-gray-500"></i>
+                 <a href="{{ url('daftar-buku') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('daftar-buku') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                  <i class="fa-solid fa-book text-2xl {{ Request::is('daftar-buku') ? 'text-white' : 'text-gray-500' }}"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Daftar Buku</span>
-                    <span class="inline-flex items-center justify-center w-3 h-3 p-4 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                       @yield('count_buku')1
-                    </span>
                  </a>
               </li>
               <li>
-                 <a href="{{ url('tambah-buku') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <i class="fa-regular fa-square-plus text-2xl text-gray-500"></i>
+                 <a href="{{ url('tambah-buku') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('tambah-buku') ? 'text-white bg-blue-500' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                  <i class="fa-regular fa-square-plus text-2xl {{ Request::is('tambah-buku') ? 'text-white' : 'text-gray-500' }}"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Tambah Buku</span>
                    
                  </a>
               </li>
-              
               <li>
-                 <a href="{{ url('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                 <a href="{{ url('daftar-user') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('daftar-user') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                  <i class="fa-solid fa-user text-2xl {{ Request::is('daftar-user') ? 'text-white' : 'text-gray-500' }}"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Daftar User</span>
+                 </a>
+              </li>
+              <li>
+                 <a href="{{ url('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                     </svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                  </a>
               </li>
+              <hr>
+              <li>
+               <a href="{{ url('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                  <i class="fa-solid fa-pager w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-2xl"></i>
+                  <span class="flex-1 ml-3 whitespace-nowrap">Pages</span>
+               </a>
+            </li>
               
            </ul>
         </div>

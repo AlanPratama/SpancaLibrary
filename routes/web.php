@@ -69,7 +69,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/update-buku/{slug}', [BukuController::class, 'update'])->name('buku.update');
 
         Route::get('dashboard', [DashboardController::class, 'index']);
-        Route::get('/daftar-user', [DashboardController::class, 'dUser']);
+        Route::get('/daftar-user', [UserController::class, 'dUser']);
+        Route::get('/edit-user/{slug}', [UserController::class, 'editUser']);
+        Route::post('/edit-user/{slug}', [UserController::class, 'editUserProcess'])->name('edit.user');
+        Route::delete('/delete-user/{slug}', [UserController::class, 'deleteUser'])->name('delete.user');
+
 
 
         // RENTLOGS RENTLOGS

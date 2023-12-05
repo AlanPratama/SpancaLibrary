@@ -10,6 +10,41 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function dUser()
+    {
+        $users = User::orderByRaw('FIELD(role_id, 1, 2)')->get(); // Mengambil semua data pengguna
+        return view('pages.admin.dUser', compact('users'));
+    }
+
+    public function deleteUser(Request $request, $slug)
+    {
+        $user = User::where('slug', $slug)->first();
+
+        
+        $user->delete();
+        
+        return redirect('/daftar-user')->with('status', 'USER BERHASIL DIHAPUS');
+        // return response()->json([
+        //     'status' => 200,
+        //     'message' => 'BERHASIL'
+        // ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function profile()
     {
         dd('ini profile');

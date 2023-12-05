@@ -18,10 +18,5 @@ class DashboardController extends Controller
         return view('pages.admin.dashboard', ['totalUsers' => $totalUsers, 'totalBuku' => $totalBuku]);
     }
 
-    public function dUser()
-    {
-        $users = User::all(); // Mengambil semua data pengguna
-        return view('pages.admin.dUser', compact('users'));
-
-    }
+    
 }

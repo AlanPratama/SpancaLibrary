@@ -9,75 +9,144 @@
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    No.
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Nama
-                </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="p-4">
                     <div class="flex items-center">
-                        Telepon
-                        <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-  </svg></a>
+                        No.
                     </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Alamat
-                        <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-  </svg></a>
-                    </div>
+                    User
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Role
-                        <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-  </svg></a>
-                    </div>
+                    Email
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Lihat</span>
+                    Telepon
+                </th>
+                <th scope="col" class="text-center px-6 py-3">
+                    Action
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $data) 
-            @if ($data)   
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $loop->iteration }}
-                </th>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $data->name }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $data->phone }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $data->address }}
-                </td>
-                <td class="px-6 py-4">
-                    @if ($data->role_id == 1)
-                        Admin
-                    @else
-                        User                        
-                    @endif
-                </td>
-                <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
-            </tr>
+            @if ($users->count() > 0)
+                @foreach ($users as $user)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="w-4 p-4">
+                            <div class="flex items-center">
+                                {{ $loop->iteration }}
+                            </div>
+                        </td>
+                        {{-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ $user->nama }}
+                </th> --}}
+                        <td class="px-6 py-8 font-semibold text-gray-500 font-medium dark:text-white">
+                            <div class="flex items-start gap-2">
+                                <img src="{{ ($user->foto == null ? asset('/assets/no-img.jpg') : asset('/storage/' . $user->foto)) }}" class="rounded"
+                                    style="width: 70px; min-width: 70px; max-width: 70px;
+                                    height: 70px; min-height: 70px; max-height: 70px;    
+                                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+                                    alt="user">
+                                <div class="flex flex-col items-start w-full">
+                                    <p class="text-lg text-gray-600" style="width: auto !important;">
+                                        {{ $user->nama }}<span
+                                            class="text-gray-500">({{ $user->username }})</span></p>
+                                    <p class="bg-blue-500 text-white px-1 rounded-sm">{{ $user->roles->name }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-8">
+                            {{ $user->email }}
+                        </td>
+                        <td class="px-6 py-8">
+                            {{ $user->telepon }}
+                        </td>
+                        <td class="px-6 py-8">
+                            {{ $user->alamat }}
+                        </td>
+                        <td class="px-6 py-8 space-x-1">
+                            <div class="flex justify-center items-center gap-2">
+
+                                <a href="daftar-user/{{ $user->slug }}" class="" type="button"
+                                    data-user-id="{{ $user->slug }}">
+                                    <i
+                                        class="fa-solid fa-circle-info font-medium text-white text-lg bg-blue-500 rounded p-2"></i>
+                                </a>
+                                <a href="{{ route('edit.user', ['slug' => $user->slug]) }}" class="">
+                                    <i
+                                        class="fa-solid fa-pen-to-square font-medium text-white text-lg bg-green-500 rounded p-2"></i>
+                                </a>
+                                <form id="deleteForm" action="{{ route('delete.user', ['slug' => $user->slug]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button"
+                                        onclick="deleteUser('{{ route('delete.user', ['slug' => $user->slug]) }}')"><i
+                                            class="fa-solid fa-trash-can font-medium text-white text-lg bg-red-500 rounded p-2"></i></button>
+                                </form>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4 text-center" colspan="8">
+                        <div class="flex flex-col justify-center items-center gap-2">
+                            <img src="{{ asset('assets/no-data.jpg') }}" class="w-32 h-32" alt="">
+
+                            <p>TIDAK ADA DATA PERIZINAN</p>
+                        </div>
+                    </td>
+                </tr>
             @endif
 
-            @endforeach
-            
         </tbody>
     </table>
 </div>
+<script>
+    function deleteUser(route) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda tidak dapat mengembalikan ini!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            confirmButtonColor: '#ff3d41',
+            cancelButtonText: 'Batal',
+            cancelButtonColor: '#8fcc34',
+        }).then((result) => {
+            if (result.isConfirmed || result.response == 200) {
+                // Submit form dengan AJAX
+                document.getElementById('deleteForm').action = route;
+                document.getElementById('deleteForm').submit();
 
+                Swal.fire({
+                    title: 'Terhapus!',
+                    text: 'Buku berhasil dihapus.',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector('b');
+                        const timerInterval = setInterval(() => {
+                            timer.textContent = `${Swal.getTimerLeft()}`;
+                        }, 100);
+                        Swal.getPopup().timerInterval = timerInterval;
+                    },
+                    willClose: () => {
+                        clearInterval(Swal.getPopup().timerInterval);
+                    }
+                }).then(() => {
+                    window.location.reload();
+                    window.location.href = 'daftar-user'
+                });
+            }
+        });
+    }
+</script>
 @endsection
     

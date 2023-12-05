@@ -36,7 +36,7 @@ class AuthController extends Controller
             }
 
             if (Auth::user()->role_id == 2) {
-                return redirect('/buku');
+                return redirect('/kumpulan-buku');
             }
 
         }else{

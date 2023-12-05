@@ -17,7 +17,7 @@
 
 
         .one{
-            margin: 10px 0px 0px 0px;
+            margin: 100px 0px 0px 0px;
         }
 
         .mother-buku-user{
@@ -41,7 +41,7 @@
             height: auto !important;
             display: flex;
             flex-wrap: wrap !important;
-            justify-content: center !important;
+            justify-content: start !important;
             gap: 0px;
             align-items: center;
         }
@@ -75,10 +75,15 @@
             height: 320px;
             width: 100%;
             border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         }
 
         .container-buku-user .buku-cover .text-detail{
             width: 220px;
+            white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+
         }
 
         .container-buku-user .buku-cover .text-detail h3{
@@ -163,7 +168,7 @@
     <div class="container-buku-user">
     @foreach ($novels as $novel)
     <div class="buku-cover">
-        <a href="buku/{{$novel->slug}}">
+        <a href="/detail-buku/{{$novel->slug}}">
             <div class="cover">
                 <img src="{{ asset('storage/'. $novel->gambar) }}" alt="">
             </div>
@@ -185,7 +190,7 @@
     <div class="container-buku-user">
     @foreach ($mangas as $manga)
     <div class="buku-cover">
-        <a href="buku/{{$manga->slug}}">
+        <a href="/detail-buku/{{$manga->slug}}">
             <div class="cover">
                 <img src="{{ asset('storage/'. $manga->gambar) }}" alt="">
             </div>
@@ -207,7 +212,7 @@
     <div class="container-buku-user">
     @foreach ($studys as $study)
     <div class="buku-cover">
-        <a href="buku/{{$study->slug}}">
+        <a href="/detail-buku/{{$study->slug}}">
             <div class="cover">
                 <img src="{{ asset('storage/'. $study->gambar) }}" alt="">
             </div>

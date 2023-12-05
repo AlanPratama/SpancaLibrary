@@ -38,6 +38,11 @@ class User extends Authenticatable
     ];
 
 
+    public function roles()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     public function rentlogs()
     {
         return $this->hasMany(RentLogs::class, 'user_id');

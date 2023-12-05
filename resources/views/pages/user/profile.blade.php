@@ -58,7 +58,7 @@
             <div class="informasi">
                 
                 <div class="flex flex-col items-center" >
-                    <img src="{{ asset('storage/'.Auth::user()->foto) }}" class="w-32 max-w-32 min-w-32 h-32 max-h-32 min-h-32 border-4 border-white rounded-full border border-black">
+                    <img src="{{ (Auth::user()->foto == null ? asset('assets/no-img.jpg') : asset('storage/'.Auth::user()->foto)) }}" class="bg-white w-32 max-w-32 min-w-32 h-32 max-h-32 min-h-32 border-4 border-gray-500 rounded-full border border-black" id="imagePreview">
                     <div class="flex justify-center items-center gap-8 w-full mt-4">
                         <div class="flex flex-col items-center">
                             <p class="text-xl font-semibold">{{ $pinjamCount }}</p>
@@ -147,7 +147,7 @@
 
                 <div class="mt-4">
                     <label for="foto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profil Picture</label>
-                    <input type="file" accept="image/*" name="foto" id="foto" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md shadow-sm focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="file" accept="image/*" name="foto" id="gambar" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md shadow-sm focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
                 <div class="mt-4">
@@ -166,5 +166,25 @@
 
     
 </div>    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('gambar');
+            const imagePreview = document.getElementById('imagePreview');
+
+            imageInput.addEventListener('change', function() {
+                if (imageInput.files && imageInput.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+
+                    reader.readAsDataURL(imageInput.files[0]);
+                }
+            });
+        });
+</script>
 
     @endsection
