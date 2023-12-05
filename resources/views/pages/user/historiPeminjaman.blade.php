@@ -17,7 +17,7 @@
 
     .mother-container-detailBukus {
         height: auto;
-        margin: 100px 0px 0px 0px;
+        margin: 100px 0px;
     }
 
     .container-detailBukus {
@@ -124,31 +124,6 @@
 
 
 
-
-
-    .bungkus-deskripsi-detailBuku {
-        display: flex;
-        justify-content: center;
-        align-items: center !important;
-        width: 100%;
-        height: auto;
-        margin-bottom: 100px;
-    }
-
-    .bungkus-deskripsi-detailBuku .deskripsi {
-        margin-left: 50px;
-        width: 80%;
-        font-size: 22px;
-        color: #262626c3;
-    }
-
-    .bungkus-deskripsi-detailBuku .deskripsi span {
-        text-align: center !important;
-        line-height: 44px;
-        font-size: 22px;
-        color: #5333f2be;
-        font-weight: 600
-    }
 
 
     .hr-bawah {

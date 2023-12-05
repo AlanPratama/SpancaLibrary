@@ -43,12 +43,52 @@
             });
         </script>
     @endif
+    <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-center items-center gap-2">
+            <a href="{{ url('/pdf/peminjaman/dikembalikan') }}">
+                <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    type="button">
+                    <i class="fa-regular fa-file-pdf text-lg text-white -ml-1 mr-2"></i>LIHAT PDF
+                </button>
+            </a>
 
+            <a href="{{ url('/pdf/peminjaman/dikembalikan-download') }}">
+                <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                    class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    type="button">
+                    <i class="fa-solid fa-download text-lg text-white -ml-1 mr-2"></i>CETAK PDF
+                </button>
+            </a>
+        </div>
+
+
+        <form class="flex items-center">
+            <label for="search-username" class="sr-only">Search</label>
+            <div class="relative w-full">
+                <input type="text" id="search-username" name="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Cari Pengguna..." required>
+            </div>
+            <button type="submit"
+                class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+                <span class="sr-only">Search</span>
+            </button>
+        </form>
+
+
+
+    </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 rounded-l-lg">
                         No.
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -66,7 +106,7 @@
                     <th scope="col" class="px-6 py-3">
                         Tanggal Kembali
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 rounded-r-lg">
                         Status
                     </th>
                 </tr>
@@ -88,8 +128,10 @@
                             <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white"
                                 style="padding: 0px 20px;">
                                 <div class="flex gap-2">
-                                    <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}"
-                                        class="w-16 max-w-16 h-16 max-h-16 rounded" style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px;" alt="Apple Watch">
+                                    <img src="{{ $item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto) }}"
+                                        class="w-16 max-w-16 h-16 max-h-16 rounded"
+                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px;"
+                                        alt="Apple Watch">
                                     <div class="flex flex-col items-start">
                                         <p>{{ $item->users->nama }}</p>
                                         <p>{{ $item->users->telepon }}</p>
@@ -144,7 +186,48 @@
     </div>
 
     <div class="" style="margin-top: 40px;">
-    <button type="button" class="bg-red-500 text-white px-4 py-2 rounded">DIKEMBALIKAN TERLAMBAT</button>
+        <button type="button" class="bg-red-500 text-white px-4 py-2 rounded">DIKEMBALIKAN TERLAMBAT</button>
+
+    </div>
+    <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-center items-center gap-2">
+            <a href="{{ url('/pdf/peminjaman/terlambat') }}">
+                <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    type="button">
+                    <i class="fa-regular fa-file-pdf text-lg text-white -ml-1 mr-2"></i>LIHAT PDF
+                </button>
+            </a>
+
+            <a href="{{ url('/pdf/peminjaman/terlambat-download') }}">
+                <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                    class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    type="button">
+                    <i class="fa-solid fa-download text-lg text-white -ml-1 mr-2"></i>CETAK PDF
+                </button>
+            </a>
+        </div>
+
+
+        <form class="flex items-center">
+            <label for="search-username" class="sr-only">Search</label>
+            <div class="relative w-full">
+                <input type="text" id="search-username" name="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Cari Pengguna..." required>
+            </div>
+            <button type="submit"
+                class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+                <span class="sr-only">Search</span>
+            </button>
+        </form>
+
+
 
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -197,8 +280,10 @@
                             <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white"
                                 style="padding: 0px 20px;">
                                 <div class="flex gap-2">
-                                    <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}"
-                                        class="rounded" style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" alt="user">
+                                    <img src="{{ $item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto) }}"
+                                        class="rounded"
+                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                                        alt="user">
                                     <div class="flex flex-col items-start">
                                         <p>{{ $item->users->nama }}</p>
                                         <p>{{ $item->users->telepon }}</p>
@@ -210,7 +295,8 @@
                                 style="padding: 0px 20px;">
                                 <div class="py-2 flex flex-col justify-center items-center w-full">
                                     <img src="{{ asset('/storage/' . $item->buku->gambar) }}" class="rounded"
-                                        style="width: 60px; max-width: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" alt="Apple Watch">
+                                        style="width: 60px; max-width: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                                        alt="Apple Watch">
                                     <p class="text-md"
                                         style="-webkit-line-clamp: 1;
                         overflow: hidden;

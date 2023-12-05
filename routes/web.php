@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RentController;
 use App\Models\Role;
 
@@ -104,7 +105,20 @@ Route::middleware('auth')->group(function () {
 
 
 
+        Route::get('/pdf/peminjaman/dipinjam', [PdfController::class, 'pdfPeminjamanDipinjam']);
+        Route::get('/pdf/peminjaman/dikembalikan', [PdfController::class, 'pdfPeminjamanDikembalikan']);
+        Route::get('/pdf/peminjaman/terlambat', [PdfController::class, 'pdfPeminjamanTerlambat']);
+        Route::get('/pdf/peminjaman/rusak', [PdfController::class, 'pdfPeminjamanRusak']);
+        Route::get('/pdf/peminjaman/hilang', [PdfController::class, 'pdfPeminjamanHilang']);
+
+        Route::get('/pdf/peminjaman/dipinjam-download', [PdfController::class, 'pdfPeminjamanDipinjamDownload']);
+        Route::get('/pdf/peminjaman/dikembalikan-download', [PdfController::class, 'pdfPeminjamanDikembalikanDownload']);
+        Route::get('/pdf/peminjaman/terlambat-download', [PdfController::class, 'pdfPeminjamanTerlambatDownload']);
+        Route::get('/pdf/peminjaman/rusak-download', [PdfController::class, 'pdfPeminjamanRusakDownload']);
+        Route::get('/pdf/peminjaman/hilang-download', [PdfController::class, 'pdfPeminjamanHilangDownload']);
+
         
+
         
     });
 

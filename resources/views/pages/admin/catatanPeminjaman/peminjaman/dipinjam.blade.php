@@ -44,11 +44,35 @@
         </script>
     @endif
     <div class="flex justify-between items-center">
-        <button data-modal-target="qr-modal" data-modal-toggle="qr-modal"
-            class="w-auto block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button">
-            <i class="fa-solid fa-qrcode text-white -ml-1 mr-2"></i>QR SCANNER
-        </button>
+        <div class="flex justify-center items-center gap-2">
+            <button data-modal-target="qr-modal" data-modal-toggle="qr-modal"
+                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                type="button">
+                <i class="fa-solid fa-qrcode text-white -ml-1 mr-2"></i>QR SCANNER
+            </button>
+            <button id="pdfDropDown" data-dropdown-toggle="dropdown"
+                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                type="button">
+                <i class="fa-regular fa-file-pdf text-lg text-white -ml-1 mr-2"></i>PDF
+            </button>
+        </div>
+
+
+
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pdfDropDown">
+                <li>
+                    <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
+                </li>
+                <li>
+                    <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
+                </li>
+                <li>
+            </ul>
+        </div>
 
 
         <form class="flex items-center">
@@ -119,7 +143,7 @@
                             <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white"
                                 style="padding: 0px 20px;">
                                 <div class="flex gap-2">
-                                    <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}"
+                                    <img src="{{ $item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto) }}"
                                         class="w-16 max-w-16 h-16 max-h-16 rounded"
                                         style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
                                         alt="Apple Watch">
@@ -134,7 +158,8 @@
                                 style="padding: 0px 20px;">
                                 <div class="py-2 flex flex-col justify-center items-center w-full">
                                     <img src="{{ asset('/storage/' . $item->buku->gambar) }}" class="rounded"
-                                        style="width: 60px; max-width: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" alt="Buku">
+                                        style="width: 60px; max-width: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                                        alt="Buku">
                                     <p class="text-md"
                                         style="-webkit-line-clamp: 1;
                                                 overflow: hidden;
@@ -213,8 +238,8 @@
                             data-modal-toggle="pelanggaran-{{ $item->kode }}">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
@@ -406,7 +431,7 @@
                                         const timer = Swal.getPopup().querySelector("b");
                                         timerInterval = setInterval(() => {
                                             timer.textContent =
-                                            `${Swal.getTimerLeft()}`;
+                                                `${Swal.getTimerLeft()}`;
                                         }, 100);
                                     },
                                     willClose: () => {
@@ -431,7 +456,7 @@
                                         const timer = Swal.getPopup().querySelector("b");
                                         timerInterval = setInterval(() => {
                                             timer.textContent =
-                                            `${Swal.getTimerLeft()}`;
+                                                `${Swal.getTimerLeft()}`;
                                         }, 100);
                                     },
                                     willClose: () => {
@@ -459,7 +484,7 @@
                                     const timer = Swal.getPopup().querySelector("b");
                                     timerInterval = setInterval(() => {
                                         timer.textContent =
-                                        `${Swal.getTimerLeft()}`;
+                                            `${Swal.getTimerLeft()}`;
                                     }, 100);
                                 },
                                 willClose: () => {
