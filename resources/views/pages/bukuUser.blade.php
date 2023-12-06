@@ -5,17 +5,6 @@
     body {
         user-select: none;
     }
-
-    .slider-buku {
-        padding-top: 100px !important;
-    }
-
-    .slider-buku .bungkus-slider-buku img {
-        margin: 0 10px;
-    }
-
-
-
     .one {
         margin: 100px 0px 0px 0px;
     }

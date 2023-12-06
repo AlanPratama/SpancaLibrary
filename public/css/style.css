@@ -434,4 +434,12 @@ footer{
     .total{
         grid-template-columns: 1fr;
     }
+
+    .container-about .text h3{
+        font-size: 30px;
+        font-weight: bold;
+        line-height:40px;
+        color: #2E2D2D;
+        margin-bottom: 18px;
+    }
 }

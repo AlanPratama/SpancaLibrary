@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\EbookController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RentController;
 use App\Models\Role;
@@ -23,9 +24,7 @@ use App\Models\Role;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.homepage');
-});
+Route::get('/', [HomepageController::class, 'home']);
 
 // Route::get('/home', function(){
 //     return view('pages.home');
