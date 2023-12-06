@@ -41,6 +41,16 @@ class Buku extends Model
         return $this->hasMany(RentLogs::class, 'buku_id');
     }
 
+    public function acceptEbook()
+    {
+        return $this->hasMany(AcceptEbook::class, 'buku_id');
+    }
+
+    public function ebook()
+    {
+        return $this->hasMany(Ebook::class, 'buku_id');
+    }
+
 
 
     public function sluggable(): array

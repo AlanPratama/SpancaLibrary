@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcceptEbook;
+use App\Models\Ebook;
 use App\Models\RentLogs;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -201,4 +203,19 @@ class UserController extends Controller
         return view('/pages.user.historiPelanggaran', compact('pelanggaran', 'terlambat'));
         // dd($perizinan);
     }
+
+    public function indexPerizinanEbook()
+    {
+        
+        $perizinan = AcceptEbook::where('user_id', Auth::user()->id)->whereHas('buku')->whereHas('users')->where('status', 'proses-izin')->first();
+        $siapdownload = Ebook::where('user_id', Auth::user()->id)->whereHas('buku')->whereHas('users')->where('status', 'Siap Download')->first();
+
+        $ebook = Ebook::where('user_id', Auth::user()->id)->where('status', 'Selesai')->whereHas('users')->whereHas('buku')->get();
+
+        return view('/pages.user.historiPerizinanEbook', compact('perizinan', 'ebook', 'siapdownload'));
+        // dd($perizinan);
+    }
+
+
+    
 }

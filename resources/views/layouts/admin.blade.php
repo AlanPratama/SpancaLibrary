@@ -97,11 +97,17 @@
             </li>
 
               <li>
-                 <a href="{{ url('daftar-buku') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('daftar-buku') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
-                  <i class="fa-solid fa-book text-2xl {{ Request::is('daftar-buku') ? 'text-white' : 'text-gray-500' }}"></i>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Daftar Buku</span>
+                 <a href="{{ url('catatan-ebook') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('catatan-ebook') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                  <i class="fa-solid fa-book text-2xl {{ Request::is('catatan-ebook') ? 'text-white' : 'text-gray-500' }}"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Catatan eBook</span>
                  </a>
               </li>
+              <li>
+               <a href="{{ url('daftar-buku') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('daftar-buku') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
+                <i class="fa-solid fa-book text-2xl {{ Request::is('daftar-buku') ? 'text-white' : 'text-gray-500' }}"></i>
+                  <span class="flex-1 ml-3 whitespace-nowrap">Daftar Buku</span>
+               </a>
+            </li>
               <li>
                  <a href="{{ url('tambah-buku') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('tambah-buku') ? 'text-white bg-blue-500' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
                   <i class="fa-regular fa-square-plus text-2xl {{ Request::is('tambah-buku') ? 'text-white' : 'text-gray-500' }}"></i>

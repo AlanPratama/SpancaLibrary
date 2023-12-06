@@ -17,4 +17,14 @@ class AcceptEbook extends Model
         'tanggal',
         'status'
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function buku()
+    {
+        return $this->belongsTo(Buku::class, 'buku_id');
+    }
 }

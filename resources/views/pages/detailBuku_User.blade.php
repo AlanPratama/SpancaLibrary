@@ -278,6 +278,7 @@
                     @if ($buku->link_ebook != null)
                         @if (Auth::user())
                             @if (Auth::user()->izin_ebook == 'false')
+                            
                                 <button class="download" data-modal-target="izinEbook-modal" data-modal-toggle="izinEbook-modal">
                                     Download (eBook)
                                 </button>
@@ -286,9 +287,12 @@
                                 <button class="download-disable" style="opacity: .5;" disabled>Download (eBook)</button>
 
                             @elseif(Auth::user()->izin_ebook == 'true')
-                                <button class="download">
-                                    Download (eBook) - TRUE
-                                </button>
+                                <form action="{{ route('download.ebook', ['slug' => $buku->slug]) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="download">
+                                        Download (eBook) - TRUE
+                                    </button>
+                                </form>
                             
                             @endif
                         @else

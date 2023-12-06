@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\EbookController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RentController;
 use App\Models\Role;
@@ -55,9 +56,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/buku/{slug}', [RentController::class, 'pinjamBuku'])->name('pinjam.buku');
     Route::get('/histori-peminjaman/{slug}', [UserController::class, 'indexHistori']);
     Route::get('/histori-pelanggaran/{slug}', [UserController::class, 'indexPelanggaran']);
+    Route::get('/histori-perizinan-ebook/{slug}', [UserController::class, 'indexPerizinanEbook']);
 
 
-    Route::post('izin.ebook/{slug}', [RentController::class, 'izinEbook'])->name('izin.ebook');
+    Route::post('izin.ebook/{slug}', [EbookController::class, 'izinEbook'])->name('izin.ebook');
+    Route::post('download.ebook/{slug}', [EbookController::class, 'downloadEbook'])->name('download.ebook');
+
 
     Route::middleware('only_admin')->group(function(){
         // ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, 
@@ -110,14 +114,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/pdf/peminjaman/terlambat', [PdfController::class, 'pdfPeminjamanTerlambat']);
         Route::get('/pdf/peminjaman/rusak', [PdfController::class, 'pdfPeminjamanRusak']);
         Route::get('/pdf/peminjaman/hilang', [PdfController::class, 'pdfPeminjamanHilang']);
+        Route::get('/pdf/perizinan/ebook', [PdfController::class, 'pdfPerizinanEbook']);
+
 
         Route::get('/pdf/peminjaman/dipinjam-download', [PdfController::class, 'pdfPeminjamanDipinjamDownload']);
         Route::get('/pdf/peminjaman/dikembalikan-download', [PdfController::class, 'pdfPeminjamanDikembalikanDownload']);
         Route::get('/pdf/peminjaman/terlambat-download', [PdfController::class, 'pdfPeminjamanTerlambatDownload']);
         Route::get('/pdf/peminjaman/rusak-download', [PdfController::class, 'pdfPeminjamanRusakDownload']);
         Route::get('/pdf/peminjaman/hilang-download', [PdfController::class, 'pdfPeminjamanHilangDownload']);
+        Route::get('/pdf/perizinan/ebook-download', [PdfController::class, 'pdfPerizinanEbookDownload']);
+
 
         
+        Route::get('/catatan-ebook', [EbookController::class, 'ebookIndex']);
+        Route::post('/catatan-ebook/setuju/{id}', [EbookController::class, 'ebookSetuju'])->name('ebook.setuju');
+        Route::delete('/catatan-ebook/tidak-setuju/{id}', [EbookController::class, 'ebookTidakSetuju'])->name('ebook.delete');
+
 
         
     });

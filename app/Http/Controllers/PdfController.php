@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ebook;
 use App\Models\RentLogs;
 use Illuminate\Http\Request;
 use PDF;
@@ -117,5 +118,32 @@ class PdfController extends Controller
 
         $pdf = PDF::loadView('pages.pdf.pelanggaran.hilangPDF', compact('hilang'));
         return $pdf->download('SpancaLibrary_hilang.pdf');
+    }
+
+
+    public function pdfPerizinanEbook()
+    {
+        $ebook = Ebook::orderByRaw("FIELD(status, 'Siap Download', 'Selesai')")
+            ->orderBy('created_at', 'desc')
+            ->whereHas('users')
+            ->whereHas('buku')
+            ->get();
+
+
+        $pdf = PDF::loadView('pages.pdf.perizinan.catatanEbookPDF', compact('ebook'));
+        return $pdf->stream('SpancaLibrary_ebook.pdf');
+    }
+
+    public function pdfPerizinanEbookDownload()
+    {
+        $ebook = Ebook::orderByRaw("FIELD(status, 'Siap Download', 'Selesai')")
+            ->orderBy('created_at', 'desc')
+            ->whereHas('users')
+            ->whereHas('buku')
+            ->get();
+
+
+        $pdf = PDF::loadView('pages.pdf.perizinan.catatanEbookPDF', compact('ebook'));
+        return $pdf->download('SpancaLibrary_ebook.pdf');
     }
 }

@@ -13,9 +13,7 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link rel="shortcut icon" href="assets/logo sekolah.jpg" type="image/x-icon"> --}}
-    <link rel="shortcut icon"
-        href="{{ asset('assets/65.png') }}"
-        type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/65.png') }}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- jQuery -->
@@ -106,7 +104,12 @@
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Histori
                                             Pelanggaran</a>
                                     </li>
-                                    
+                                    <hr>
+                                    <li> <a href="{{ url('/histori-perizinan-ebook/' . Auth::user()->slug) }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Histori
+                                            Perizinan eBook</a>
+                                    </li>
+
                                     <li> <a href="{{ url('logout') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
                                     </li>

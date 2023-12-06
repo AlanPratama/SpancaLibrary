@@ -43,15 +43,31 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function rentlogs()
-    {
-        return $this->hasMany(RentLogs::class, 'user_id');
-    }
 
     public function buku()
     {
         return $this->belongsTo(Buku::class, 'buku_id');
     }
+
+
+
+
+    public function rentlogs()
+    {
+        return $this->hasMany(RentLogs::class, 'user_id');
+    }
+
+    public function acceptEbook()
+    {
+        return $this->hasMany(AcceptEbook::class, 'user_id');
+    }
+
+    public function ebook()
+    {
+        return $this->hasMany(Ebook::class, 'user_id');
+    }
+
+    
 
 
 
