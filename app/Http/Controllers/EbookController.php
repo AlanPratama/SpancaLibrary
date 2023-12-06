@@ -35,7 +35,7 @@ class EbookController extends Controller
             'kode'    => $perizinan->users->username. Str::random(8),
             'user_id' => $perizinan->users->id,
             'buku_id' => $perizinan->buku->id,
-            'tanggal_izin' => Carbon::now()->toDateString(),
+            'tanggal_izin' => $perizinan->tanggal,
             'status'  => 'Siap Download',
         ];
 
@@ -85,6 +85,7 @@ class EbookController extends Controller
 
         $ebook->buku_id = $buku->id;
         $ebook->status = 'Selesai';
+        $ebook->tanggal_izin = Carbon::now()->toDateString();
         $ebook->update();
 
         $ebook->users->izin_ebook = 'false';

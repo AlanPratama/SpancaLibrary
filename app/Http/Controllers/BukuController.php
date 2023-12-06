@@ -26,7 +26,9 @@ class BukuController extends Controller
         $novels = Buku::where('kategori', 'Novel')->get();
         $mangas = Buku::where('kategori', 'Manga')->get();
         $studys = Buku::where('kategori', 'Study')->get();
-        return view('pages.bukuUser', compact('novels', 'mangas', 'studys', 'bukus'));
+
+        $terpopuler = Buku::orderBy('total_pinjam', 'desc')->paginate(6);
+        return view('pages.bukuUser', compact('novels', 'mangas', 'studys', 'bukus', 'terpopuler'));
     }
 
 

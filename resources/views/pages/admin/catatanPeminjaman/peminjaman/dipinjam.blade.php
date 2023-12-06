@@ -555,7 +555,7 @@
             var inputValue = event.target.value;
             event.target.value = formatRupiah(inputValue);
         });
-    </script>
+    </script> 
 
 
 @endsection

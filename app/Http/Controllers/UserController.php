@@ -58,6 +58,8 @@ class UserController extends Controller
             // Simpan file dengan nama baru
             $gambarPath = $uploadedFile->storeAs('users', $newFileName);
             $path = $gambarPath;
+            $user->foto = $path;
+
         }
 
         // Update attributes
@@ -67,7 +69,6 @@ class UserController extends Controller
         $user->telepon = $request-> telepon;
         $user->alamat = $request-> alamat;
         $user->role_id = $request-> role_id;
-        $user->foto = $path;
 
         $user->slug = null;
         $user->update();
@@ -80,12 +81,35 @@ class UserController extends Controller
     {
         $user = User::where('slug', $slug)->first();
         $rent = RentLogs::where('user_id', $user->id)->get();
+        $acceptEbook = AcceptEbook::where('user_id', $user->id)->get();
+        $ebook = Ebook::where('user_id', $user->id)->get();
+
         
         if ($rent->count() > 0) {
             foreach ($rent as $item) {
                 $item->delete();
             }
         }
+
+        if ($acceptEbook->count() > 0) {
+            foreach ($acceptEbook as $item) {
+                $item->delete();
+            }
+        }
+
+        if ($ebook->count() > 0) {
+            foreach ($ebook as $item) {
+                $item->delete();
+            }
+        }
+
+        $gambarSebelum = $user->foto;
+
+
+        if ($gambarSebelum) {
+            Storage::delete($gambarSebelum);
+        }
+
         $user->delete();
         
         return redirect('/daftar-user')->with('status', 'USER BERHASIL DIHAPUS');

@@ -27,18 +27,31 @@
     @endif
     <div class="flex justify-between items-center">
         <div class="flex justify-center items-center gap-2">
+            <a href="{{ url('/tambah-buku') }}">
+                <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                    <i class="fa-regular fa-square-plus text-white -ml-1 mr-2"></i>TAMBAH BUKU
+                </button>
+            </a>
             <a href="#">
-                <button class="w-auto block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="fa-solid fa-qrcode text-white -ml-1 mr-2"></i>QR SCANNER
+                <button class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" id="pdfDropDown" data-dropdown-toggle="dropdown">
+                    <i class="fa-regular fa-file-pdf text-white -ml-1 mr-2"></i>PDF
                 </button>
             </a>
+        </div>
 
-            <a href="">
-
-                <button class="w-auto block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="fa-solid fa-qrcode text-white -ml-1 mr-2"></i>QR SCANNER
-                </button>
-            </a>
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pdfDropDown">
+                <li>
+                    <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
+                </li>
+                <li>
+                    <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
+                </li>
+                <li>
+            </ul>
         </div>
 
 

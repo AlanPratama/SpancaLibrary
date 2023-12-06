@@ -240,6 +240,30 @@
     </div>
 
     <div class="mother-buku-user one">
+        <h3 class="judul">Buku <span>Terpopuler</span></h3>
+        <div class="container-buku-user">
+            @foreach ($terpopuler as $populer)
+                <div class="buku-cover">
+                    <a href="/detail-buku/{{ $populer->slug }}">
+                        <div class="cover">
+                            <img src="{{ asset('storage/' . $populer->gambar) }}" alt="">
+                        </div>
+                        <div class="text-detail">
+                            <h3>{{ $populer->nama }}</h3>
+                            <p>{{ $populer->pengarang }}</p>
+                            <div class="flex justify-between pr-4 mt-2">
+                                <button>{{ $populer->kategori }}</button>
+                            <p class="" style="font-size: 18px;"> <span class="bg-blue-500 py-1 px-1.5 rounded-full text-white">{{ $populer->total_pinjam }}x</span> <span class="md:block hidden">Dipinjam</span> </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+
+    <div class="mother-buku-user one">
         <h3 class="judul">Daftar Buku <span>Novel</span></h3>
         <div class="container-buku-user">
             @foreach ($novels as $novel)

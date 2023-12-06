@@ -317,13 +317,28 @@
 
 
     <div class="flex flex-col justify-center items-center w-full mb-8">
-        <div class="flex justify-between items-center" style="width: 90%;">
-            <button data-modal-target="qr-modal" data-modal-toggle="qr-modal"
-                class="w-auto block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button">
-                <i class="fa-solid fa-qrcode text-white -ml-1 mr-2"></i>QR SCANNER
+        <div class="flex justify-between items-center mb-1" style="width: 90%;">
+            <button
+                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                id="filterDropDown" data-dropdown-toggle="dropdown">
+                <i class="fa-solid fa-sort text-white -ml-1 mr-2"></i>FILTER
             </button>
     
+            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="filterDropDown">
+                    <li>
+                        <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
+                                class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
+                                class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
     
             <form class="flex items-center">
                 <label for="search-username" class="sr-only">Search</label>

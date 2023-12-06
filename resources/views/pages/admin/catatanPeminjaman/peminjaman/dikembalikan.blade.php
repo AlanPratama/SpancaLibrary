@@ -94,7 +94,7 @@
                     <th scope="col" class="px-6 py-3">
                         Kode
                     </th>
-                    <th scope="col" class="px-6 py-3" style="padding: 0px 20px;">
+                    <th scope="col" class="px-6 py-3" style="padding: 0px 120px;">
                         Peminjam
                     </th>
                     <th scope="col" class="px-6 py-3" style="padding: 0px 20px;">
@@ -240,7 +240,7 @@
                     <th scope="col" class="px-6 py-3">
                         Kode
                     </th>
-                    <th scope="col" class="px-6 py-3" style="padding: 0px 20px;">
+                    <th scope="col" class="px-6 py-3" style="padding: 0px 120px;">
                         Peminjam
                     </th>
                     <th scope="col" class="px-6 py-3" style="padding: 0px 20px;">

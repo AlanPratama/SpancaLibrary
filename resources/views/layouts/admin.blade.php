@@ -10,8 +10,8 @@
 
     <link rel="icon" href="assets/logo sekolah.jpg">
     <title>@yield('title') | Spanca Library</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{{ asset('assets/65.png') }}" type="image/x-icon">
@@ -74,7 +74,7 @@
 
             <li>
                <button type="button" class="flex items-center w-full p-2 transition duration-75 rounded-lg group {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white bg-blue-500' : 'text-gray-500 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="catatan-pelanggaran" data-collapse-toggle="catatan-pelanggaran">
-                  <i class="fa-solid fa-clipboard text-2xl "></i>
+                  <i class="fa-solid fa-exclamation text-2xl px-2"></i>
                      <span class="flex-1 ml-3 text-left whitespace-nowrap {{ Request::is('catatan-terlambat') || Request::is('catatan-rusak') || Request::is('catatan-hilang') ? 'text-white' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">Catatan Pelanggaran</span>
                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -98,7 +98,7 @@
 
               <li>
                  <a href="{{ url('catatan-ebook') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('catatan-ebook') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
-                  <i class="fa-solid fa-book text-2xl {{ Request::is('catatan-ebook') ? 'text-white' : 'text-gray-500' }}"></i>
+                  <i class="fa-solid fa-book-atlas text-2xl {{ Request::is('catatan-ebook') ? 'text-white' : 'text-gray-500' }}"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Catatan eBook</span>
                  </a>
               </li>
@@ -117,7 +117,7 @@
               </li>
               <li>
                  <a href="{{ url('daftar-user') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('daftar-user') ? 'text-white bg-blue-500' : 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
-                  <i class="fa-solid fa-user text-2xl {{ Request::is('daftar-user') ? 'text-white' : 'text-gray-500' }}"></i>
+                  <i class="fa-solid fa-users text-2xl {{ Request::is('daftar-user') ? 'text-white' : 'text-gray-500' }}"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Daftar User</span>
                  </a>
               </li>
@@ -181,8 +181,5 @@
 
 
      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-     
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 </body>
 </html>
