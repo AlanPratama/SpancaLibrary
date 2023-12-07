@@ -309,7 +309,7 @@
                             <div class="text-detail">
                                 <h3>{{ $populer->nama }}</h3>
                                 <p>{{ $populer->pengarang }}</p>
-                                <div class="flex justify-between md:pr-4 pr-1 mt-2">
+                                <div class="flex justify-between items-center md:pr-4 pr-1 mt-2">
                                     <button>{{ $populer->kategori }}</button>
                                     <p class="w-auto flex justify-end items-center gap-1" style="font-size: 14px;"> <span
                                             class="bg-blue-500 py-1 px-2 rounded-full text-white">{{ $populer->total_pinjam }}x</span>
@@ -344,7 +344,7 @@
                             <div class="text-detail">
                                 <h3>{{ $novel->nama }}</h3>
                                 <p>{{ $novel->pengarang }}</p>
-                                <div class="flex justify-between md:pr-4 pr-1 mt-2">
+                                <div class="flex justify-between items-center md:pr-4 pr-1 mt-2">
                                     <button>{{ $novel->kategori }}</button>
                                     <p class="w-auto flex justify-end items-center gap-1" style="font-size: 14px;"> <span
                                             class="bg-blue-500 py-1 px-2 rounded-full text-white">{{ $novel->total_pinjam }}x</span>
@@ -379,7 +379,7 @@
                             <div class="text-detail">
                                 <h3>{{ $manga->nama }}</h3>
                                 <p>{{ $manga->pengarang }}</p>
-                                <div class="flex justify-between md:pr-4 pr-1 mt-2">
+                                <div class="flex justify-between items-center md:pr-4 pr-1 mt-2">
                                     <button>{{ $manga->kategori }}</button>
                                     <p class="w-auto flex justify-end items-center gap-1" style="font-size: 14px;"> <span
                                             class="bg-blue-500 py-1 px-2 rounded-full text-white">{{ $manga->total_pinjam }}x</span>
@@ -413,7 +413,7 @@
                             <div class="text-detail">
                                 <h3>{{ $study->nama }}</h3>
                                 <p>{{ $study->pengarang }}</p>
-                                <div class="flex justify-between md:pr-4 pr-1 mt-2">
+                                <div class="flex justify-between items-center md:pr-4 pr-1 mt-2">
                                     <button>{{ $study->kategori }}</button>
                                     <p class="w-auto flex justify-end items-center gap-1" style="font-size: 14px;"> <span
                                             class="bg-blue-500 py-1 px-2 rounded-full text-white">{{ $study->total_pinjam }}x</span>

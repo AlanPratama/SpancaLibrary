@@ -240,9 +240,9 @@
                         <div class="text-detail">
                             <h3>{{ $populer->nama }}</h3>
                             <p>{{ $populer->pengarang }}</p>
-                            <div class="flex justify-between pr-4 mt-2">
-                                <button>{{ $populer->kategori }}</button>
-                            <p class="" style="font-size: 18px;"> <span class="bg-blue-500 py-1 px-1.5 rounded-full text-white">{{ $populer->total_pinjam }}x</span> <span class="md:block hidden">Dipinjam</span> </p>
+                            <div class="flex justify-between items-center pr-4 mt-2">
+                                <button class="">{{ $populer->kategori }}</button>
+                            <p class="flex items-center justify-end gap-1" style="font-size: 15px;"> <span class="bg-blue-500 py-1 px-2 rounded-full text-white">{{ $populer->total_pinjam }}x</span> <span class="md:block hidden">Dipinjam</span> </p>
                             </div>
                         </div>
                     </a>
