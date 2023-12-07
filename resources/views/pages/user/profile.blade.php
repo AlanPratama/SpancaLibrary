@@ -88,8 +88,8 @@
 
                     <div class="flex flex-col items-center">
                         <img src="{{ Auth::user()->foto == null ? asset('assets/no-img.jpg') : asset('storage/' . Auth::user()->foto) }}"
-                            style="width: 120px; max-width: 120px; min-width: 120px;  height: 120px; max-height: 120px; min-height: 120px;"
-                            class="bg-white border-4 border-gray-500 rounded-full border border-black" id="imagePreview">
+                            style="width: 120px; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; max-width: 120px; min-width: 120px;  height: 120px; max-height: 120px; min-height: 120px;"
+                            class="bg-white rounded-full" id="imagePreview">
                         <div class="flex justify-center items-center gap-8 w-full mt-4">
                             <div class="flex flex-col items-center">
                                 <p class="text-xl font-semibold">{{ $pinjamCount }}</p>

@@ -12,9 +12,18 @@ use Illuminate\Support\Str;
 
 class RentController extends Controller
 {
-    public function dikembalikanIndex()
+    public function dikembalikanIndex(Request $request)
     {
-        $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->get();
+        // if ($request->filter) {
+        //     if ($request->filter == 'terbaru') {
+        //         $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(15);
+        //     }
+        // }
+
+        $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(15);
+
+
+
         $terlambat = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', '!=', null)->where('denda', '!=', null)->get();
 
         return view('pages.admin.catatanPeminjaman.peminjaman.dikembalikan', compact('rent', 'terlambat'));

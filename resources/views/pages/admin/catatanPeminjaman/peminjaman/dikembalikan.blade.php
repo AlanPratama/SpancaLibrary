@@ -68,7 +68,7 @@
             <div class="relative w-full">
                 <input type="text" id="search-username" name="username"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Pengguna..." required>
+                    placeholder="Cari Peminjam..." required>
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -79,7 +79,32 @@
                 </svg>
                 <span class="sr-only">Search</span>
             </button>
-        </form>
+            {{-- <button id="filterModal" data-dropdown-toggle="dropdown"
+                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                type="button">
+                <i class="fa-solid fa-sort text-white -ml-1 mr-2"></i>FILTER
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdown"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="filterModal">
+                    <li>
+                        <form>
+                            <button type="submit" value="terbaru" name="filter"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
+                            class="fa-solid fa-eye mr-1"></i> Terbaru</button>
+                        </li>
+                        <li>
+                            <button type="submit" value="terlama" name="filter"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
+                            class="fa-solid fa-download mr-1"></i> Terlama</button>
+                        </li>
+                        <li>
+                    </form>
+                </ul>
+            </div>
+        </form> --}}
 
 
 
@@ -88,7 +113,7 @@
         <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3 rounded-l-lg">
+                    <th scope="col" class="px-4 py-3 rounded-l-lg">
                         No.
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -106,6 +131,9 @@
                     <th scope="col" class="px-6 py-3">
                         Tanggal Kembali
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Dikembalikan
+                    </th>
                     <th scope="col" class="px-6 py-3 rounded-r-lg">
                         Status
                     </th>
@@ -117,7 +145,7 @@
                     @foreach ($rent as $item)
                         <tr
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="p-4">
+                            <td class="px-4 py-4">
                                 {{ $loop->iteration }}
                             </td>
 
@@ -162,6 +190,10 @@
                             </td>
 
                             <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
+                                {{ $item->dikembalikan }}
+                            </td>
+
+                            <td class="px-6 py-4 font-semibold text-gray-500 font-medium dark:text-white">
                                 {{ $item->status }}
                             </td>
                         </tr>
@@ -177,12 +209,27 @@
                             </div>
                         </td>
                     </tr>
-
                 @endif
-
-
             </tbody>
         </table>
+
+        <div class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <div class="px-6 py-4 text-center my-4 flex justify-start gap-2" style="user-select: none;" colspan="8">
+                @if ($rent->currentPage() > 1)
+                    <a class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                        href="{{ $rent->previousPageUrl() }}">Previous</a>
+                @elseif($rent->currentPage() == 1)
+                    <a class="opacity-40 flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                @endif
+                @for ($i = max(1, $rent->currentPage() - 1); $i <= min($rent->lastPage(), $rent->currentPage() + 1); $i++)
+                    <a class="{{ $i == $rent->currentPage() ? 'flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' }} px-1.5 py-1 rounded"
+                        href="{{ $rent->url($i) }}">{{ $i }}</a>
+                @endfor
+                @if ($rent->hasMorePages())
+                    <a class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" href="{{ $rent->nextPageUrl() }}">Next</a>
+                @endif
+            </div>
+        </div>
     </div>
 
     <div class="" style="margin-top: 40px;">
@@ -214,7 +261,7 @@
             <div class="relative w-full">
                 <input type="text" id="search-username" name="username"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Pengguna..." required>
+                    placeholder="Cari Peminjam..." required>
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
