@@ -20,7 +20,7 @@ class RentController extends Controller
         //     }
         // }
 
-        $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(15);
+        $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(5);
 
 
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AcceptEbook;
 use App\Models\RentLogs;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,17 +17,26 @@ class RentlogsSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 2; $i <= 13; $i++) {
-            RentLogs::create([
-                'kode' => 'qilaaa' . Str::random(8),
-                'user_id' => 3,
+        // for ($i = 2; $i <= 5; $i++) {
+        //     RentLogs::create([
+        //         'kode' => 'perpus65' . Str::random(8),
+        //         'user_id' => $i,
+        //         'buku_id' => $i,
+        //         'tanggal_pinjam' => '2023-12-03',
+        //         'tanggal_kembali' => '2023-12-08',
+        //         'dikembalikan'    => '2023-12-08',
+        //         'hari_terlambat' => null,
+        //         'denda'        => 120000,
+        //         'status'    => 'Rusak'
+        //     ]);
+        // }
+
+        for ($i = 2; $i <= 5; $i++) {
+            AcceptEbook::create([
+                'user_id' => $i,
                 'buku_id' => $i,
-                'tanggal_pinjam' => '2023-12-7',
-                'tanggal_kembali' => '2023-12-12',
-                'dikembalikan'    => '2023-12-11',
-                'hari_terlambat' => null,
-                'denda'        => null,
-                'status'    => 'Dikembalikan'
+                'tanggal' => '2023-12-08',
+                'status'    => 'proses-izin'
             ]);
         }
 

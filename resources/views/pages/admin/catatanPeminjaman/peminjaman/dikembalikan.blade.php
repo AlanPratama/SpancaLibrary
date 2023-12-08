@@ -103,8 +103,8 @@
                         <li>
                     </form>
                 </ul>
-            </div>
-        </form> --}}
+            </div> --}}
+        </form>
 
 
 
@@ -256,7 +256,7 @@
         </div>
 
 
-        <form class="flex items-center">
+        <form class="flex items-centerw-1/3">
             <label for="search-username" class="sr-only">Search</label>
             <div class="relative w-full">
                 <input type="text" id="search-username" name="username"
