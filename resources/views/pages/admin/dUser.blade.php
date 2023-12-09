@@ -147,7 +147,7 @@
                                         <p class="text-lg text-gray-600" style="width: auto !important;">
                                             {{ $user->nama }}<span class="text-gray-500">({{ $user->username }})</span>
                                         </p>
-                                        <p class="bg-blue-500 text-white px-1 rounded-sm">{{ $user->roles->name }}</p>
+                                        <p class="{{ ($user->role_id == 1 ? 'bg-orange-500' : 'bg-blue-500') }} text-white px-1 rounded-sm">{{ $user->roles->name }}</p>
                                     </div>
                                 </div>
                             </td>
