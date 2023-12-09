@@ -36,7 +36,7 @@ Route::post('login', [AuthController::class, 'authenticating']);
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'registerProcess']);
 
-// USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE, 
+// USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE,
 
 Route::get('/kategori/novel', [BukuController::class, 'novel'])->name('buku.novels');
 Route::get('/kategori/manga', [BukuController::class, 'manga'])->name('buku.mangas');
@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::middleware('only_admin')->group(function(){
-        // ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, 
+        // ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN, ROUTE ADMIN,
         Route::get('/daftar-buku', [BukuController::class, 'index'])->name('dBuku.index');
         Route::get('/daftar-buku/{slug}', [BukuController::class, 'show'])->name('buku.show');
         Route::delete('/delete-buku/{slug}', [BukuController::class, 'destroy'])->name('buku.destroy');
@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'index']);
         Route::get('/daftar-user', [UserController::class, 'dUser']);
+        Route::get('/detail-user/{slug}', [UserController::class, 'detailUser']);
         Route::get('/edit-user/{slug}', [UserController::class, 'editUser'])->name('editIndex.user');
         Route::put('/edit-user/{slug}', [UserController::class, 'editUserProcess'])->name('edit.user');
         Route::delete('/delete-user/{slug}', [UserController::class, 'deleteUser'])->name('delete.user');
@@ -123,17 +124,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/pdf/peminjaman/hilang-download', [PdfController::class, 'pdfPeminjamanHilangDownload']);
         Route::get('/pdf/perizinan/ebook-download', [PdfController::class, 'pdfPerizinanEbookDownload']);
 
+        Route::get('/pdf/user', [PdfController::class, 'pdfUserLihat']);
+        Route::get('/pdf/user-download', [PdfController::class, 'pdfUserDownload']);
 
-        
+
         Route::get('/catatan-ebook', [EbookController::class, 'ebookIndex']);
         Route::post('/catatan-ebook/setuju/{id}', [EbookController::class, 'ebookSetuju'])->name('ebook.setuju');
         Route::delete('/catatan-ebook/tidak-setuju/{id}', [EbookController::class, 'ebookTidakSetuju'])->name('ebook.delete');
 
 
-        
+
     });
 
-    
+
 
 });
 

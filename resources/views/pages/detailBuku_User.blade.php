@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Detail Buku')
+@section('title', $buku->nama)
 
 <style>
     nav {
@@ -270,6 +270,7 @@
                 <p><span>Tahun Terbit:</span> {{ $buku->tahun_terbit }}</p>
                 <p><span>Kategori:</span> {{ $buku->kategori }}</p>
                 <p><span>Genre:</span> {{ $buku->genre }}</p>
+                <p><span>Total Dipinjam:</span> {{ $buku->total_pinjam }}</p>
                 <hr class="h-px rounded mt-4 bg-gray-400 border-0 dark:bg-gray-700">
                 <div class="pinjaman">
 
@@ -278,11 +279,11 @@
                     @if ($buku->link_ebook != null)
                         @if (Auth::user())
                             @if (Auth::user()->izin_ebook == 'false')
-                            
+
                                 <button class="download" data-modal-target="izinEbook-modal" data-modal-toggle="izinEbook-modal">
                                     Download (eBook)
                                 </button>
-                                
+
                             @elseif(Auth::user()->izin_ebook == 'proses-izin')
                                 <button class="download-disable" style="opacity: .5;" disabled>Download (eBook)</button>
 
@@ -293,7 +294,7 @@
                                         Download (eBook) - TRUE
                                     </button>
                                 </form>
-                            
+
                             @endif
                         @else
                             <button class="download">
@@ -301,10 +302,10 @@
                             </button>
                         @endif
                     @else
-                    
+
                     @endif
 
-                    
+
 
 
 

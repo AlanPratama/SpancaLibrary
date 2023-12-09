@@ -25,18 +25,19 @@
             });
         </script>
     @endif
-    <div class="flex justify-between items-center">
+    <div class="flex flex-wrap justify-between items-center">
         <div class="flex justify-center items-center gap-2">
             <a href="{{ url('/tambah-buku') }}">
-                <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                <button
+                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                     <i class="fa-regular fa-square-plus text-white -ml-1 mr-2"></i>TAMBAH BUKU
                 </button>
             </a>
-            <a href="#">
-                <button class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" id="pdfDropDown" data-dropdown-toggle="dropdown">
-                    <i class="fa-regular fa-file-pdf text-white -ml-1 mr-2"></i>PDF
-                </button>
-            </a>
+            <button
+                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                id="pdfDropDown" data-dropdown-toggle="dropdown">
+                <i class="fa-regular fa-file-pdf text-white -ml-1 mr-2"></i>PDF
+            </button>
         </div>
 
         <!-- Dropdown menu -->
@@ -44,23 +45,36 @@
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pdfDropDown">
                 <li>
                     <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
+                            class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
                 </li>
                 <li>
                     <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
+                            class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
                 </li>
                 <li>
             </ul>
         </div>
 
 
-        <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+        <form class="flex md:flex-nowrap flex-wrap justify-center gap-2 items-center">
+
+            <select id="kategori" name="kategori"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block md:w-1/3 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Kategori</option>
+                <option value="Novel">Novel</option>
+                <option value="Manga">Manga</option>
+                <option value="Study">Study</option>
+            </select>
+
+            <div class="md:w-2/3 w-[80%]">
+                <label for="searching-buku" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching-buku" name="buku"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Buku..." required>
+                    placeholder="Cari Buku...">
+            </div>
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -72,9 +86,6 @@
                 <span class="sr-only">Search</span>
             </button>
         </form>
-
-
-
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -82,7 +93,7 @@
                 <tr>
                     <th scope="col" class="p-4 rounded-l-lg">
                         <div class="flex items-center">
-                            ID
+                            NO.
                         </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -111,7 +122,7 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
-                                    {{ $buku->id }}
+                                    {{ $loop->iteration }}
                                 </div>
                             </td>
                             {{-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -121,7 +132,7 @@
                                 <div class="flex items-start gap-2">
                                     <img src="{{ asset('/storage/' . $buku->gambar) }}" class="rounded"
                                         style="width: 70px; min-width: 70px; max-width: 70px;
-                                        height: 108px; min-height: 108px; max-height: 108px;    
+                                        height: 108px; min-height: 108px; max-height: 108px;
                                         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
                                         alt="Buku">
                                     <div class="flex flex-col items-start w-full">

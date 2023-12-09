@@ -16,11 +16,39 @@ class EbookController extends Controller
 {
     public function ebookIndex(Request $request)
     {
-        $perizinan = AcceptEbook::whereHas('buku')->whereHas('users')->where('status', 'proses-izin')->get();
-        $ebook = Ebook::whereHas('users')->whereHas('buku')
-            ->orderByRaw("FIELD(status, 'Siap Download', 'Selesai')")
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($request->pengizin || $request->nama) {
+            if ($request->pengizin) {
+                $perizinan = AcceptEbook::whereHas('buku')
+                    ->whereHas('users', function ($q) use ($request) {
+                        $q->where('nama', 'LIKE', '%' . $request->pengizin . '%');
+                    })
+                    ->where('status', 'proses-izin')
+                    ->get();
+            } else {
+                $perizinan = AcceptEbook::whereHas('buku')->whereHas('users')->where('status', 'proses-izin')->get();
+            }
+
+            if ($request->nama) {
+                $ebook = Ebook::whereHas('users', function ($q) use ($request) {
+                        $q->where('nama', 'LIKE', '%' . $request->nama . '%');
+                    })
+                    ->whereHas('buku')
+                    ->orderByRaw("FIELD(status, 'Siap Download', 'Selesai')")
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            } else {
+                $ebook = Ebook::whereHas('users')->whereHas('buku')
+                    ->orderByRaw("FIELD(status, 'Siap Download', 'Selesai')")
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+        } else {
+            $perizinan = AcceptEbook::whereHas('buku')->whereHas('users')->where('status', 'proses-izin')->get();
+            $ebook = Ebook::whereHas('users')->whereHas('buku')
+                ->orderByRaw("FIELD(status, 'Siap Download', 'Selesai')")
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
 
 
         return view('pages.admin.catatanEbook.ebookIndex', compact('perizinan', 'ebook'));
@@ -32,7 +60,7 @@ class EbookController extends Controller
         $perizinan->users->update();
 
         $data = [
-            'kode'    => $perizinan->users->username. Str::random(8),
+            'kode'    => $perizinan->users->username . Str::random(8),
             'user_id' => $perizinan->users->id,
             'buku_id' => $perizinan->buku->id,
             'tanggal_izin' => $perizinan->tanggal,
@@ -66,7 +94,7 @@ class EbookController extends Controller
         $user->update();
 
         $buku = Buku::where('slug', $slug)->first();
-        
+
         $data = [
             'user_id' => $user->id,
             'buku_id' => $buku->id,
@@ -75,7 +103,7 @@ class EbookController extends Controller
         ];
 
         AcceptEbook::create($data);
-        return redirect('/histori-perizinan-ebook/'.Auth::user()->slug)->with('status', 'PERIZINAN BERHASIL DIBUAT');
+        return redirect('/histori-perizinan-ebook/' . Auth::user()->slug)->with('status', 'PERIZINAN BERHASIL DIBUAT');
     }
 
     public function downloadEbook(Request $request, $slug)

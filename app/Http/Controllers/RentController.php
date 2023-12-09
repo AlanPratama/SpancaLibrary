@@ -9,22 +9,44 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Termwind\Components\Raw;
 
 class RentController extends Controller
 {
     public function dikembalikanIndex(Request $request)
     {
-        // if ($request->filter) {
-        //     if ($request->filter == 'terbaru') {
-        //         $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(15);
-        //     }
-        // }
+        if ($request->namaPeminjam || $request->nama) {
+            if ($request->namaPeminjam) {
+                $rent = RentLogs::where('status', 'Dikembalikan')
+                    ->where('hari_terlambat', null)
+                    ->where('denda', null)
+                    ->orderBy('dikembalikan', 'desc')
+                    ->whereHas('users', function ($q) use ($request) {
+                        $q->where('nama', 'LIKE', '%' . $request->namaPeminjam . '%');
+                    })
+                    ->paginate(100);
+            } else {
+                $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(5);
+            }
 
-        $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(5);
+            if ($request->nama) {
+                $terlambat = RentLogs::where('status', 'Dikembalikan')
+                    ->where('hari_terlambat', '!=', null)
+                    ->where('denda', '!=', null)
+                    ->whereHas('users', function ($q) use ($request) {
+                        $q->where('nama', 'LIKE', '%' . $request->nama . '%');
+                    })
+                    ->get();
+            } else {
+                $terlambat = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', '!=', null)->where('denda', '!=', null)->get();
+            }
+        } else {
+            $rent = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', null)->where('denda', null)->orderBy('dikembalikan', 'desc')->paginate(5);
+            $terlambat = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', '!=', null)->where('denda', '!=', null)->get();
+        }
 
 
 
-        $terlambat = RentLogs::where('status', 'Dikembalikan')->where('hari_terlambat', '!=', null)->where('denda', '!=', null)->get();
 
         return view('pages.admin.catatanPeminjaman.peminjaman.dikembalikan', compact('rent', 'terlambat'));
     }
@@ -64,11 +86,10 @@ class RentController extends Controller
     public function butuhPersetujuan(Request $request)
     {
 
-        if ($request->username) {
-            $perizinan = RentLogs::where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users', function($q) use($request) {
-                $q->where('username', 'LIKE', '%' .$request->username.'%');
+        if ($request->nama) {
+            $perizinan = RentLogs::where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users', function ($q) use ($request) {
+                $q->where('nama', 'LIKE', '%' . $request->nama . '%');
             })->get();
-
         } else {
             $perizinan = RentLogs::where('status', 'Butuh Persetujuan')->whereHas('buku')->whereHas('users')->get();
         }
@@ -144,9 +165,18 @@ class RentController extends Controller
 
 
 
-    public function dipinjamIndex()
+    public function dipinjamIndex(Request $request)
     {
-        $rent = RentLogs::where('status', 'Dipinjam')->whereHas('buku')->whereHas('users')->get();
+        if ($request->nama) {
+            $rent = RentLogs::where('status', 'Dipinjam')->whereHas('buku')
+                ->whereHas('users', function ($q) use ($request) {
+                    $q->where('nama', 'LIKE', '%' . $request->nama . '%');
+                })
+                ->get();
+        } else {
+            $rent = RentLogs::where('status', 'Dipinjam')->whereHas('buku')->whereHas('users')->get();
+        }
+
 
         return view('pages.admin.catatanPeminjaman.peminjaman.dipinjam', compact('rent'));
     }
@@ -191,7 +221,6 @@ class RentController extends Controller
                     'message' => 'BERHASIL!',
                     'rent' => $rent
                 ]);
-
             } else {
                 $rent->users->buku_id = null;
                 $rent->users->save();
@@ -206,7 +235,6 @@ class RentController extends Controller
                     'rent' => $rent
                 ]);
             }
-            
         } else {
             return response()->json([
                 'status' => false,
@@ -218,9 +246,18 @@ class RentController extends Controller
 
 
 
-    public function terlambatIndex()
+    public function terlambatIndex(Request $request)
     {
-        $rent = RentLogs::where('status', 'Terlambat')->whereHas('buku')->whereHas('users')->get();
+        if ($request->nama) {
+            $rent = RentLogs::where('status', 'Terlambat')
+                ->whereHas('buku')
+                ->whereHas('users', function($q) use($request) {
+                    $q->where('nama', 'LIKE', '%'. $request->nama .'%');
+                })
+                ->get();
+        } else {
+            $rent = RentLogs::where('status', 'Terlambat')->whereHas('buku')->whereHas('users')->get();
+        }
 
 
         foreach ($rent as $item) {
@@ -250,7 +287,7 @@ class RentController extends Controller
 
         $hariTerlambat = $tanggalKembali->diffInDays($tanggalSekarang);
         $totalDenda = $hariTerlambat * 5000;
-        
+
         $rent->users->buku_id = null;
         $rent->users->save();
 
@@ -270,13 +307,13 @@ class RentController extends Controller
         if ($rent) {
             $tanggalKembali = Carbon::parse($rent->tanggal_kembali);
             $tanggalSekarang = Carbon::now();
-    
+
             $hariTerlambat = $tanggalKembali->diffInDays($tanggalSekarang);
             $totalDenda = $hariTerlambat * 5000;
-            
+
             $rent->users->buku_id = null;
             $rent->users->save();
-    
+
             $rent->hari_terlambat = $hariTerlambat;
             $rent->denda = $totalDenda;
             $rent->dikembalikan = Carbon::now()->toDateString();
@@ -288,8 +325,6 @@ class RentController extends Controller
                 'message' => 'PEMINJAMAN TERLAMBAT TELAH SELESAI',
                 'rent' => $rent,
             ]);
-            
-            
         } else {
             return response()->json([
                 'status' => false,
@@ -320,9 +355,18 @@ class RentController extends Controller
         return redirect('/catatan-dipinjam')->with('status', 'TOTAL DENDA RUSAK TELAH DIKIRIM');
     }
 
-    public function rusakIndex()
+    public function rusakIndex(Request $request)
     {
-        $rent = RentLogs::where('status', 'Rusak')->whereHas('buku')->whereHas('users')->get();
+        if ($request->nama) {
+            $rent = RentLogs::where('status', 'Rusak')
+                ->whereHas('buku')
+                ->whereHas('users', function($q) use($request) {
+                    $q->where('nama', 'LIKE', '%'. $request->nama .'%');
+                })
+                ->get();
+        } else {
+            $rent = RentLogs::where('status', 'Rusak')->whereHas('buku')->whereHas('users')->get();
+        }
 
         return view('pages.admin.catatanPeminjaman.pelanggaran.rusak', compact('rent'));
     }
@@ -355,11 +399,18 @@ class RentController extends Controller
     }
 
 
-    public function hilangIndex()
+    public function hilangIndex(Request $request)
     {
-        $rent = RentLogs::where('status', 'Hilang')->whereHas('buku')->whereHas('users')->get();
-
+        if ($request->nama) {
+            $rent = RentLogs::where('status', 'Hilang')
+                ->whereHas('buku')
+                ->whereHas('users', function($q) use($request) {
+                    $q->where('nama', 'LIKE', '%'. $request->nama .'%');
+                })
+                ->get();
+        } else {
+            $rent = RentLogs::where('status', 'Hilang')->whereHas('buku')->whereHas('users')->get();
+        }
         return view('pages.admin.catatanPeminjaman.pelanggaran.hilang', compact('rent'));
-
     }
 }

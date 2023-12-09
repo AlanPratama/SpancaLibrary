@@ -166,7 +166,7 @@
 <div class="mother-buku-user one">
     <h3 class="judul text-center">Daftar Buku <span>Manga</span></h3>
     <div class="flex justify-center items-center w-full" style="margin-bottom: 30px;">
-        <div class="flex justify-center md:items-center items-start gap-4" style="width: 80%;">
+        <form class="flex justify-center md:items-center items-start gap-4" style="width: 80%;">
             <button id="filterDrop" data-dropdown-toggle="dropdown"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="button">Filter <svg class="w-2.5 h-2.5  ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -180,30 +180,25 @@
             <div id="dropdown"
                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="filterDrop">
-                    <form>
+                    <div>
                         <li>
-                            <button name="kategori" value="novel" type="submit"
-                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Novel
+                            <button name="filter" value="populer" type="submit"
+                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Terpopuler
                             </button>
                         </li>
                         <li>
-                            <button name="kategori" value="manga" type="submit"
-                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Manga
+                            <button name="filter" value="ebook" type="submit"
+                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">eBook
                             </button>
                         </li>
-                        <li>
-                            <button name="kategori" value="study" type="submit"
-                                class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                            </button>
-                        </li>
-                    </form>
+                    </div>
                 </ul>
             </div>
 
-            <form class="flex items-center w-full">
-                <label for="search-username" class="sr-only">Search</label>
+            <div class="flex items-center w-full">
+                <label for="searching" class="sr-only">Search</label>
                 <div class="relative w-full">
-                    <input type="text" id="search-username" name="username"
+                    <input type="text" id="searching" name="nama"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Cari Buku...">
                 </div>
@@ -216,9 +211,9 @@
                     </svg>
                     <span class="sr-only">Search</span>
                 </button>
-            </form>
+            </div>
 
-        </div>
+        </form>
     </div>
     <div class="container-buku-user">
         @foreach ($mangas as $manga)

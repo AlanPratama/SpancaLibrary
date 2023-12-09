@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $totalBuku = Buku::count();
@@ -23,7 +23,15 @@ class DashboardController extends Controller
         $totalPeminjaman = RentLogs::count();
         $totalPerizinan = AcceptEbook::count() + Ebook::count();
 
-        $rent = RentLogs::where('status', 'Dipinjam')->whereHas('buku')->whereHas('users')->get();
+        if ($request->nama) {
+            $rent = RentLogs::where('status', 'Dipinjam')->whereHas('buku')
+                ->whereHas('users', function ($q) use($request) {
+                    $q->where('nama', 'LIKE', '%'. $request->nama .'%');
+                } )
+                ->get();
+        } else {
+            $rent = RentLogs::where('status', 'Dipinjam')->whereHas('buku')->whereHas('users')->get();
+        }
 
         $chartTotalData = RentLogs::where('status', '!=', 'Butuh Persetujuan')->whereBetween('tanggal_pinjam', [Carbon::now()->subDays(7), Carbon::now()])->count();
         $chartData = RentLogs::select(DB::raw('DATE(tanggal_pinjam) as tanggal_pinjam'), DB::raw('COUNT(*) as total_peminjaman'))

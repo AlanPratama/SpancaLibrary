@@ -52,9 +52,9 @@
 
 
         <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+            <label for="searching-izin" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching-izin" name="pengizin"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Cari Peminjam...">
             </div>
@@ -110,7 +110,7 @@
                                 <div class="flex gap-2">
                                     <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}"
                                         class="w-16 max-w-16 h-16 max-h-16 rounded"
-                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" 
+                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
                                         alt="user">
                                     <div class="flex flex-col items-start">
                                         <p>{{ $item->users->nama }}</p>
@@ -203,11 +203,11 @@
 
 
         <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+            <label for="searching-done" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching-done" name="nama"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Peminjam..." required>
+                    placeholder="Cari Peminjam...">
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -264,7 +264,7 @@
                                 <div class="flex gap-2">
                                     <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}"
                                         class="w-16 max-w-16 h-16 max-h-16 rounded"
-                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" 
+                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
                                         alt="user">
                                     <div class="flex flex-col items-start">
                                         <p>{{ $item->users->nama }}</p>

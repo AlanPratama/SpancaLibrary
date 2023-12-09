@@ -120,11 +120,11 @@
 
 
         <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+            <label for="searching" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching" name="nama"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Peminjam..." required>
+                    placeholder="Cari Peminjam...">
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -448,7 +448,7 @@
             </div>
         </div>
         <div id="peminjaman-chart"></div>
-        <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+        {{-- <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
             <div class="flex justify-between items-center pt-5">
                 <!-- Button -->
                 <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown"
@@ -466,29 +466,32 @@
                 <div id="lastDaysdropdown"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                7 days</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                30 days</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                90 days</a>
-                        </li>
+                        <form>
+                            <li>
+                                <button name="filterChart" value="7-hari" type="submit"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">7 Hari Terakhir</button>
+                            </li>
+                            <li>
+                                <button name="filterChart" value="14-hari" type="submit"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">14 Hari Terakhir</button>
+                            </li>
+                            <li>
+                                <button name="filterChart" value="30-hari" type="submit"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">30 Hari Terakhir</button>
+                            </li>
+                            <li>
+                                <button name="filterChart" value="60-hari" type="submit"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">60 Hari Terakhir</button>
+                            </li>
+                            <li>
+                                <button name="filterChart" value="90-hari" type="submit"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">90 Hari Terakhir</button>
+                            </li>
+                            <li>
+                                <button name="filterChart" value="setahun" type="submit"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1 Tahun Terakhir</button>
+                            </li>
+                        </form>
                     </ul>
                 </div>
                 <a href="#"
@@ -501,7 +504,7 @@
                     </svg>
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 

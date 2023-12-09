@@ -22,13 +22,28 @@
             });
         </script>
     @endif
-    <div class="flex justify-between items-center">
+
+    @if (session('failed'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "error",
+                title: "{{ session('failed') }}"
+            });
+        </script>
+    @endif
+    <div class="flex flex-wrap justify-between items-center">
         <div class="flex justify-center items-center gap-2">
-            <button
-                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                id="filterDropDown" data-dropdown-toggle="dropdown">
-                <i class="fa-solid fa-sort text-white -ml-1 mr-2"></i>FILTER
-            </button>
             <button
                 class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                 id="pdfDropDown" data-dropdown-toggle="dropdown">
@@ -40,28 +55,12 @@
         <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pdfDropDown">
                 <li>
-                    <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
+                    <a href="{{ url('/pdf/user') }}"
                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
                             class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
                 </li>
                 <li>
-                    <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
-                            class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
-                </li>
-                <li>
-            </ul>
-        </div>
-
-        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="filterDropDown">
-                <li>
-                    <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
-                            class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
-                </li>
-                <li>
-                    <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
+                    <a href="{{ url('/pdf/user-download') }}"
                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
                             class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
                 </li>
@@ -70,12 +69,22 @@
         </div>
 
 
-        <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+        <form class="flex md:flex-nowrap flex-wrap justify-center gap-2 items-center">
+
+            <select id="role" name="role"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block md:w-1/3 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Pilih Role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+
+            <div class="md:w-2/3 w-[80%]">
+                <label for="searching-user" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching-user" name="nama"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari User..." required>
+                    placeholder="Cari User...">
+            </div>
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -87,9 +96,6 @@
                 <span class="sr-only">Search</span>
             </button>
         </form>
-
-
-
     </div>
     <div class=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -134,7 +140,7 @@
                                     <img src="{{ $user->foto == null ? asset('/assets/no-img.jpg') : asset('/storage/' . $user->foto) }}"
                                         class="rounded"
                                         style="width: 70px; min-width: 70px; max-width: 70px;
-                                    height: 70px; min-height: 70px; max-height: 70px;    
+                                    height: 70px; min-height: 70px; max-height: 70px;
                                     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
                                         alt="user">
                                     <div class="flex flex-col items-start w-full">
@@ -155,9 +161,12 @@
                                 {{ $user->alamat }}
                             </td>
                             <td class="px-6 py-8 space-x-1">
+                                @if ($user->role_id == 1)
+
+                                @else
                                 <div class="flex justify-center items-center gap-2">
 
-                                    <a href="daftar-user/{{ $user->slug }}" class="" type="button"
+                                    <a href="detail-user/{{ $user->slug }}" class="" type="button"
                                         data-user-id="{{ $user->slug }}">
                                         <i
                                             class="fa-solid fa-circle-info font-medium text-white text-lg bg-blue-500 rounded p-2"></i>
@@ -175,8 +184,7 @@
                                                 class="fa-solid fa-trash-can font-medium text-white text-lg bg-red-500 rounded p-2"></i></button>
                                     </form>
                                 </div>
-
-
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -217,7 +225,7 @@
 
                     Swal.fire({
                         title: 'Terhapus!',
-                        text: 'Buku berhasil dihapus.',
+                        text: 'USER BERHASIL DIHAPUS',
                         icon: 'success',
                         timer: 2000,
                         timerProgressBar: true,

@@ -238,7 +238,7 @@
             });
         </script>
     @endif
-    
+
     @if ($perizinan)
         <div class="mother-container-detailBukus">
             <div class="flex justify-center lg:mb-6 mb-2">
@@ -310,28 +310,33 @@
                 id="filterDropDown" data-dropdown-toggle="dropdown">
                 <i class="fa-solid fa-sort text-white -ml-1 mr-2 md:inline-block hidden"></i>FILTER
             </button>
-    
+
             <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="filterDropDown">
+                    <form>
                     <li>
-                        <a href="{{ url('/pdf/peminjaman/dipinjam') }}"
-                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
-                                class="fa-solid fa-eye mr-1"></i> Lihat PDF</a>
+                        <button name="filter" value="novel" type="submit"
+                            class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Novel</button>
                     </li>
                     <li>
-                        <a href="{{ url('/pdf/peminjaman/dipinjam-download') }}"
-                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i
-                                class="fa-solid fa-download mr-1"></i> Cetak PDF</a>
+                        <button name="filter" value="manga" type="submit"
+                            class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Manga</a>
                     </li>
                     <li>
+                        <button name="filter" value="study" type="submit"
+                            class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study</a>
+                    </li>
+                </form>
                 </ul>
             </div>
+
+
             <form class="flex items-center">
-                <label for="search-username" class="sr-only">Search</label>
+                <label for="search" class="sr-only">Search</label>
                 <div class="relative w-full">
-                    <input type="text" id="search-username" name="username"
+                    <input type="text" id="search" name="nama"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Cari Peminjaman..." required>
+                        placeholder="Cari Buku...">
                 </div>
                 <button type="submit"
                     class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -343,9 +348,6 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
-    
-    
-    
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg" style="width: 90%;">
             <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
@@ -367,7 +369,7 @@
                 </thead>
                 <tbody>
                     @if ($ebook->count() > 0)
-                        
+
                         @foreach ($ebook as $item)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -398,7 +400,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @else 
+                        @else
                         <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 text-center" colspan="4">
@@ -410,7 +412,7 @@
                         </td>
                     </tr>
                         @endif
-                   
+
 
 
                 </tbody>

@@ -16,13 +16,33 @@ class BukuController extends Controller
 
     public function index(Request $request)
     {
-        $bukus = Buku::all();
+        if ($request->kategori && $request->buku) {
+            $bukus = Buku::where('kategori', $request->kategori)->where('nama', 'LIKE', '%'. $request->buku . '%')->get();
+        } elseif($request->kategori) {
+            $bukus = Buku::where('kategori', $request->kategori)->get();
+        } elseif($request->buku) {
+            $bukus = Buku::where('nama', 'LIKE', '%'. $request->buku . '%')->get();
+        } else {
+            $bukus = Buku::all();
+        }
         return view('pages.admin.dBuku', compact('bukus'));
     }
 
     public function index_user(Request $request)
     {
-        $bukus = Buku::all();
+        if ($request->kategori || $request->nama) {
+            if ($request->kategori && $request->nama) {
+                $bukus = Buku::where('kategori', $request->kategori)->where('nama', 'LIKE', '%' . $request->nama . '%' )->get();
+            } elseif ($request->kategori) {
+                $bukus = Buku::where('kategori', $request->kategori)->get();
+            } elseif ($request->nama) {
+                $bukus = Buku::where('nama', 'LIKE', '%' . $request->nama . '%' )->get();
+            }
+        } else {
+            $bukus = Buku::all();
+        }
+
+
         $novels = Buku::where('kategori', 'Novel')->get();
         $mangas = Buku::where('kategori', 'Manga')->get();
         $studys = Buku::where('kategori', 'Study')->get();
@@ -180,14 +200,50 @@ class BukuController extends Controller
 
     public function novel(Request $request)
     {
-        $novels = Buku::where('kategori', 'Novel')->get();
+        if ($request->nama || $request->filter) {
+            if ($request->filter == 'populer') {
+                $novels = Buku::where('kategori', 'Novel')
+                    ->orderBy('total_pinjam', 'desc')
+                    ->get();
+            } elseif ($request->filter == 'ebook') {
+                $novels = Buku::where('kategori', 'Novel')
+                    ->where('link_ebook', '!=', null)
+                    ->get();
+            }
+
+            if($request->nama) {
+                $novels = Buku::where('kategori', 'Novel')
+                    ->where('nama', 'LIKE', '%' . $request->nama . '%')
+                    ->get();
+            }
+        } else {
+                $novels = Buku::where('kategori', 'Novel')->get();
+        }
 
         return view('pages.kategoriNovel_User', compact('novels'));
     }
 
     public function manga(Request $request)
     {
-        $mangas = Buku::where('kategori', 'Manga')->get();
+        if ($request->nama || $request->filter) {
+            if ($request->filter == 'populer') {
+                $mangas = Buku::where('kategori', 'Manga')
+                    ->orderBy('total_pinjam', 'desc')
+                    ->get();
+            } elseif ($request->filter == 'ebook') {
+                $mangas = Buku::where('kategori', 'Manga')
+                    ->where('link_ebook', '!=', null)
+                    ->get();
+            }
+
+            if($request->nama) {
+                $mangas = Buku::where('kategori', 'Manga')
+                    ->where('nama', 'LIKE', '%' . $request->nama . '%')
+                    ->get();
+            }
+        } else {
+                $mangas = Buku::where('kategori', 'Manga')->get();
+        }
 
         return view('pages.kategoriManga_User', compact('mangas'));
     }
@@ -195,6 +251,26 @@ class BukuController extends Controller
     public function study(Request $request)
     {
         $studys = Buku::where('kategori', 'Study')->get();
+
+        if ($request->nama || $request->filter) {
+            if ($request->filter == 'populer') {
+                $studys = Buku::where('kategori', 'Study')
+                    ->orderBy('total_pinjam', 'desc')
+                    ->get();
+            } elseif ($request->filter == 'ebook') {
+                $studys = Buku::where('kategori', 'Study')
+                    ->where('link_ebook', '!=', null)
+                    ->get();
+            }
+
+            if($request->nama) {
+                $studys = Buku::where('kategori', 'Study')
+                    ->where('nama', 'LIKE', '%' . $request->nama . '%')
+                    ->get();
+            }
+        } else {
+                $studys = Buku::where('kategori', 'Study')->get();
+        }
 
         return view('pages.kategoriStudy_User', compact('studys'));
     }

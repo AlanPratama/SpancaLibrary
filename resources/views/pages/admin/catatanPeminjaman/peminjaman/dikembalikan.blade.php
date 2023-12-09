@@ -64,11 +64,11 @@
 
 
         <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+            <label for="search" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="search" name="namaPeminjam"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Peminjam..." required>
+                    placeholder="Cari Peminjam...">
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -257,11 +257,11 @@
 
 
         <form class="flex items-centerw-1/3">
-            <label for="search-username" class="sr-only">Search</label>
+            <label for="searching" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching" name="nama"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Peminjam..." required>
+                    placeholder="Cari Peminjam...">
             </div>
             <button type="submit"
                 class="p-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

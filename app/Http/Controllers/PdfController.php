@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Ebook;
 use App\Models\RentLogs;
+use App\Models\User;
+use Database\Seeders\RentlogsSeeder;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -145,5 +147,28 @@ class PdfController extends Controller
 
         $pdf = PDF::loadView('pages.pdf.perizinan.catatanEbookPDF', compact('ebook'));
         return $pdf->download('SpancaLibrary_ebook.pdf');
+    }
+
+
+
+    public function pdfUserLihat()
+    {
+        $user = User::where('role_id', 2)->get();
+        $rents = RentLogs::where('status', '!=', 'Butuh Persetujuan')->get();
+        $ebooks = Ebook::all();
+
+        $pdf = PDF::loadView('pages.pdf.user.userPdf', compact('user', 'rents', 'ebooks'));
+        return $pdf->stream('SpancaLibrary_user.pdf');
+    }
+
+
+    public function pdfUserDownload()
+    {
+        $user = User::where('role_id', 2)->get();
+        $rents = RentLogs::where('status', '!=', 'Butuh Persetujuan')->get();
+        $ebooks = Ebook::all();
+
+        $pdf = PDF::loadView('pages.pdf.user.userPdf', compact('user', 'rents', 'ebooks'));
+        return $pdf->download('SpancaLibrary_user.pdf');
     }
 }

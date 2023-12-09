@@ -52,9 +52,9 @@
 
 
         <form class="flex items-center">
-            <label for="search-username" class="sr-only">Search</label>
+            <label for="searching" class="sr-only">Search</label>
             <div class="relative w-full">
-                <input type="text" id="search-username" name="username"
+                <input type="text" id="searching" name="nama"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Cari Peminjam...">
             </div>
@@ -121,7 +121,7 @@
                                 <div class="flex gap-2">
                                     <img src="{{ ($item->users->foto == null ? asset('assets/no-img.jpg') : asset('/storage/' . $item->users->foto)) }}"
                                         class="w-16 max-w-16 h-16 max-h-16 rounded"
-                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" 
+                                        style="width: 60px; max-width: 60px; min-width: 60px;  height: 60px; max-height: 60px; min-height: 60px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
                                         alt="user">
                                     <div class="flex flex-col items-start">
                                         <p>{{ $item->users->nama }}</p>

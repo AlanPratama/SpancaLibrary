@@ -17,28 +17,28 @@ class RentlogsSeeder extends Seeder
      */
     public function run()
     {
-        // for ($i = 2; $i <= 5; $i++) {
-        //     RentLogs::create([
-        //         'kode' => 'perpus65' . Str::random(8),
-        //         'user_id' => $i,
-        //         'buku_id' => $i,
-        //         'tanggal_pinjam' => '2023-12-03',
-        //         'tanggal_kembali' => '2023-12-08',
-        //         'dikembalikan'    => '2023-12-08',
-        //         'hari_terlambat' => null,
-        //         'denda'        => 120000,
-        //         'status'    => 'Rusak'
-        //     ]);
-        // }
-
         for ($i = 2; $i <= 5; $i++) {
-            AcceptEbook::create([
+            RentLogs::create([
+                'kode' => 'perpus' . Str::random(8),
                 'user_id' => $i,
                 'buku_id' => $i,
-                'tanggal' => '2023-12-08',
-                'status'    => 'proses-izin'
+                'tanggal_pinjam' => '2023-12-09',
+                'tanggal_kembali' => '2023-12-14',
+                'dikembalikan'    => null,
+                'hari_terlambat' => null,
+                'denda'        => null,
+                'status'    => 'Butuh Persetujuan'
             ]);
         }
+
+        // for ($i = 2; $i <= 5; $i++) {
+        //     AcceptEbook::create([
+        //         'user_id' => $i,
+        //         'buku_id' => $i,
+        //         'tanggal' => '2023-12-08',
+        //         'status'    => 'proses-izin'
+        //     ]);
+        // }
 
         // for ($i = 2; $i <= 13; $i++) {
         //     RentLogs::create([

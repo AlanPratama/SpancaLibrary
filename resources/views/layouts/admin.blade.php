@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{{ asset('assets/65.png') }}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" /> --}}
 
 </head>
 
@@ -30,10 +30,10 @@
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
          </svg>
       </button>
-      
+
       <h3 class="mr-4 text-3xl">Spanca Library</h3>
     </div>
-     
+
      <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
            <ul class="mt-2 space-y-4 font-medium">
@@ -61,15 +61,15 @@
                <ul id="catatan" class="hidden py-2 space-y-2">
                      <li>
                         <a href="{{ url('catatan-butuh-persetujuan') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Butuh Persetujuan</a>
-                        
+
                      </li>
                      <li>
                         <a href="{{ url('catatan-dipinjam') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Dipinjam</a>
-                        
+
                      </li>
                      <li>
                         <a href="{{ url('catatan-dikembalikan') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Dikembalikan</a>
-                        
+
                      </li>
                </ul>
             </li>
@@ -86,15 +86,15 @@
                <ul id="catatan-pelanggaran" class="hidden py-2 space-y-2">
                      <li>
                         <a href="{{ url('catatan-terlambat') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Terlambat</a>
-                        
+
                      </li>
                      <li>
                         <a href="{{ url('catatan-rusak') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Rusak</a>
-                        
+
                      </li>
                      <li>
                         <a href="{{ url('catatan-hilang') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Hilang</a>
-                        
+
                      </li>
                </ul>
             </li>
@@ -115,7 +115,7 @@
                  <a href="{{ url('tambah-buku') }}" class="flex items-center p-2 rounded-lg dark:text-white {{ Request::is('tambah-buku') ? 'text-white bg-blue-500' : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }} group">
                   <i class="fa-regular fa-square-plus text-2xl {{ Request::is('tambah-buku') ? 'text-white' : 'text-gray-500' }}"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Tambah Buku</span>
-                   
+
                  </a>
               </li>
               <li>
@@ -139,11 +139,17 @@
                   <span class="flex-1 ml-3 whitespace-nowrap">Pages</span>
                </a>
             </li>
-              
+            <li>
+                <a href="{{ url('/setting/'.Auth::user()->slug) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white text-gray-700 hover:bg-gray-100 dark:text-white group">
+                   <i class="fa-solid fa-user w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-2xl"></i>
+                   <span class="flex-1 ml-3 whitespace-nowrap">Setting</span>
+                </a>
+             </li>
+
            </ul>
         </div>
      </aside>
-     
+
      <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
          <div class="flex items-center justify-start h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
@@ -152,12 +158,12 @@
             </div>
          </div>
          <div class="grid grid-cols-2 total gap-4 ml-2 mb-4">
-            
+
             @yield('total_user')
             @yield('total_buku')
             @yield('rent_log_online')
             @yield('rent_log_offline')
-            
+
          </div>
          <div class="grid grid-cols-1 gap-4 ml-2 mb-4">
             @yield('editBuku')
@@ -174,15 +180,15 @@
          </div>
       </div>
      </div>
-     
- 
-    
-    
 
-  
-    
 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+
+
+
+
+
+
+     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script> --}}
      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
