@@ -36,6 +36,9 @@ Route::post('login', [AuthController::class, 'authenticating']);
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'registerProcess']);
 
+
+Route::get('peraturan', [HomepageController::class, 'peraturan']);
+
 // USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE, USER ROUTE,
 
 Route::get('/kategori/novel', [BukuController::class, 'novel'])->name('buku.novels');

@@ -444,7 +444,7 @@
         <div class="flex justify-between">
             <div>
                 <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">{{ $chartTotalData }}</h5>
-                <p class="text-base font-normal text-gray-500 dark:text-gray-400">Peminjaman Minggu Ini</p>
+                <p class="text-base font-normal text-gray-500 dark:text-gray-400">Peminjaman Seminggu Ini</p>
             </div>
         </div>
         <div id="peminjaman-chart"></div>

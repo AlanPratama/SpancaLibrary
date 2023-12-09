@@ -7,6 +7,7 @@
     {{-- <link rel="icon" href="assets/logo sekolah.jpg"> --}}
     <title>@yield('title') | Spanca Library</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
