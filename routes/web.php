@@ -26,10 +26,6 @@ use App\Models\Role;
 
 Route::get('/', [HomepageController::class, 'home']);
 
-// Route::get('/home', function(){
-//     return view('pages.home');
-// });
-
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'authenticating']);
@@ -134,16 +130,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/catatan-ebook', [EbookController::class, 'ebookIndex']);
         Route::post('/catatan-ebook/setuju/{id}', [EbookController::class, 'ebookSetuju'])->name('ebook.setuju');
         Route::delete('/catatan-ebook/tidak-setuju/{id}', [EbookController::class, 'ebookTidakSetuju'])->name('ebook.delete');
-
-
-
     });
-
-
-
 });
-
-
-
-
-

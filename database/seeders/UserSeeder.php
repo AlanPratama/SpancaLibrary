@@ -17,100 +17,100 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'role_id' => 2,
+            'role_id' => 1,
             'buku_id' => null,
             'izin_ebook' => false,
 
-            'nama' => 'Achmad Surya',
-            'email' => 'surya@gmail.com',
-            'telepon' => '085817000940',
-            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.', 
+            'nama' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'telepon' => '084817000940',
+            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.',
             'foto' => null,
-            
-            'slug' => 'achmads',
-            'username' => 'achmads',
-            'password' => Hash::make('achmad'),
+
+            'slug' => 'admin',
+            'username' => 'admin',
+            'password' => Hash::make('admin'),
         ]);
 
 
-        User::create([
-            'role_id' => 2,
-            'buku_id' => null,
-            'izin_ebook' => false,
+        // User::create([
+        //     'role_id' => 2,
+        //     'buku_id' => null,
+        //     'izin_ebook' => false,
 
-            'nama' => 'Yurika',
-            'email' => 'rika@gmail.com',
-            'telepon' => '085817000943',
-            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.', 
-            'foto' => null,
-            
-            'slug' => 'rika',
-            'username' => 'rika',
-            'password' => Hash::make('rika'),
-        ]);
+        //     'nama' => 'Yurika',
+        //     'email' => 'rika@gmail.com',
+        //     'telepon' => '085817000943',
+        //     'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.',
+        //     'foto' => null,
 
-        User::create([
-            'role_id' => 2,
-            'buku_id' => null,
-            'izin_ebook' => false,
+        //     'slug' => 'rika',
+        //     'username' => 'rika',
+        //     'password' => Hash::make('rika'),
+        // ]);
 
-            'nama' => 'Ratna',
-            'email' => 'ratna@gmail.com',
-            'telepon' => '085817000944',
-            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.', 
-            'foto' => null,
-            
-            'slug' => 'ratna',
-            'username' => 'ratna',
-            'password' => Hash::make('ratna'),
-        ]);
+        // User::create([
+        //     'role_id' => 2,
+        //     'buku_id' => null,
+        //     'izin_ebook' => false,
 
-        User::create([
-            'role_id' => 2,
-            'buku_id' => null,
-            'izin_ebook' => false,
+        //     'nama' => 'Ratna',
+        //     'email' => 'ratna@gmail.com',
+        //     'telepon' => '085817000944',
+        //     'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.',
+        //     'foto' => null,
 
-            'nama' => 'Arif Ibrahim',
-            'email' => 'arif@gmail.com',
-            'telepon' => '085817000945',
-            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.', 
-            'foto' => null,
-            
-            'slug' => 'arif',
-            'username' => 'arif',
-            'password' => Hash::make('arif'),
-        ]);
+        //     'slug' => 'ratna',
+        //     'username' => 'ratna',
+        //     'password' => Hash::make('ratna'),
+        // ]);
 
-        User::create([
-            'role_id' => 2,
-            'buku_id' => null,
-            'izin_ebook' => false,
+        // User::create([
+        //     'role_id' => 2,
+        //     'buku_id' => null,
+        //     'izin_ebook' => false,
 
-            'nama' => 'Fathul Bari',
-            'email' => 'bari@gmail.com',
-            'telepon' => '085817000946',
-            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.', 
-            'foto' => null,
-            
-            'slug' => 'bari',
-            'username' => 'bari',
-            'password' => Hash::make('bari'),
-        ]);
+        //     'nama' => 'Arif Ibrahim',
+        //     'email' => 'arif@gmail.com',
+        //     'telepon' => '085817000945',
+        //     'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.',
+        //     'foto' => null,
 
-        User::create([
-            'role_id' => 2,
-            'buku_id' => null,
-            'izin_ebook' => false,
+        //     'slug' => 'arif',
+        //     'username' => 'arif',
+        //     'password' => Hash::make('arif'),
+        // ]);
 
-            'nama' => 'Zikriyandri',
-            'email' => 'zikri@gmail.com',
-            'telepon' => '085817000947',
-            'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.', 
-            'foto' => null,
-            
-            'slug' => 'zikri',
-            'username' => 'zikri',
-            'password' => Hash::make('zikri'),
-        ]);
+        // User::create([
+        //     'role_id' => 2,
+        //     'buku_id' => null,
+        //     'izin_ebook' => false,
+
+        //     'nama' => 'Fathul Bari',
+        //     'email' => 'bari@gmail.com',
+        //     'telepon' => '085817000946',
+        //     'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.',
+        //     'foto' => null,
+
+        //     'slug' => 'bari',
+        //     'username' => 'bari',
+        //     'password' => Hash::make('bari'),
+        // ]);
+
+        // User::create([
+        //     'role_id' => 2,
+        //     'buku_id' => null,
+        //     'izin_ebook' => false,
+
+        //     'nama' => 'Zikriyandri',
+        //     'email' => 'zikri@gmail.com',
+        //     'telepon' => '085817000947',
+        //     'alamat' => 'Jl. Lorem ipsum dolor sit amet consectetur.',
+        //     'foto' => null,
+
+        //     'slug' => 'zikri',
+        //     'username' => 'zikri',
+        //     'password' => Hash::make('zikri'),
+        // ]);
     }
 }
